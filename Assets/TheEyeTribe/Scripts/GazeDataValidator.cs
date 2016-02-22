@@ -46,6 +46,10 @@ class GazeDataValidator
     protected double _LastValidEyeDistance;
     protected double _LastValidEyeAngle;
 
+
+    //Added By Ander & Rasmus
+    protected bool _EyeTrackerStateFail;
+    // End
     #endregion
 
     #region Private methods
@@ -90,6 +94,9 @@ class GazeDataValidator
                 // if no tracking problems, then cache eye data
                 if ((gd.State & NO_TRACKING_MASK) == 0)
                 {
+                    //Added By Ander & Rasmus
+                    _EyeTrackerStateFail = false;
+                    // end
                     if (null == userPos &&
                         !gd.LeftEye.PupilCenterCoordinates.Equals(Point2D.zero) &&
                         !gd.RightEye.PupilCenterCoordinates.Equals(Point2D.zero))
@@ -117,6 +124,12 @@ class GazeDataValidator
                         gazeCoordsSmooth = gd.SmoothedCoordinates;
                     }
                 }
+                //Added By Ander & Rasmus
+                else
+                {
+                    _EyeTrackerStateFail = true;
+                }
+                // end
 
                 // break loop if valid values found
                 if (null != userPos && null != gazeCoords)
@@ -271,6 +284,13 @@ class GazeDataValidator
 
         return -1;
     }
+
+    //Added By Ander & Rasmus
+    public bool GetCurrentEyeTrackerState()
+    {
+        return _EyeTrackerStateFail;
+    }
+    //end
 
     #endregion
 }
