@@ -22,11 +22,13 @@ public class test : MonoBehaviour {
     {
         if(current != endColor)
         {
+            StopCoroutine(ChangeColor(startColor));
             StartCoroutine(ChangeColor(endColor));
             return;
         }
         if (current != startColor)
         {
+            StopCoroutine(ChangeColor(endColor));
             StartCoroutine(ChangeColor(startColor));
         }
     }

@@ -4,6 +4,10 @@ using System.Collections;
 public class LookAwayHandler : MonoBehaviour {
 
     private GameObject _GazeIndicator;
+    private float
+        _timer = 0,
+        _timeToBlink = 100,
+        _errorNoBlink = 500;
 
     // Use this for initialization
     void Start () {
@@ -14,10 +18,15 @@ public class LookAwayHandler : MonoBehaviour {
 	void Update () {
         if (_GazeIndicator.transform.parent.GetComponent<EyeTribeUnityScript>().LookingAtScreen())
         {
+            if(_timer > _timeToBlink && _timer < _errorNoBlink)
+            {
+                Debug.Log("You blinked at " + System.DateTime.Now);
+            }
+            _timer = 0;
             Debug.Log("You are looking, Creep");
         } else
         {
-            Debug.Log("You are not Looking at the screen");
+            _timer += Time.deltaTime * 1000;
         }
     }
 }
