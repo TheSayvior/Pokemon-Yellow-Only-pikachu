@@ -6,6 +6,7 @@ public class test : MonoBehaviour {
     public Color endColor;
     public Color startColor;
 
+    private bool _running = false;
     Color current;
 
 	// Use this for initialization
@@ -20,15 +21,7 @@ public class test : MonoBehaviour {
 
     public void RunEnum()
     {
-        if(current != endColor)
-        {
-            StartCoroutine(ChangeColor(endColor));
-            return;
-        }
-        if (current != startColor)
-        {
-            StartCoroutine(ChangeColor(startColor));
-        }
+        if (_running == false) StartCoroutine(ChangeColor());
     }
 
     void OnMouseDown()
@@ -36,12 +29,21 @@ public class test : MonoBehaviour {
         //GetComponent<Renderer>().material.color = Color.black;
     }
 
-    IEnumerator ChangeColor( Color col)
+    IEnumerator ChangeColor()
     {
-
-        GetComponent<Renderer>().material.color = col;
-        current = col;
+        _running = true;
+        current = GetComponent<Renderer>().material.color;
+        if( current == endColor)
+        {
+            GetComponent<Renderer>().material.color = startColor;
+        } else
+        {
+            GetComponent<Renderer>().material.color = endColor;
+        }
         Debug.Log("changed color");
-        return null;
+        yield return new WaitForSeconds(1);
+        _running = false;
+
+        yield return null;
     }
 }

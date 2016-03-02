@@ -18,6 +18,7 @@ public class EyeTribeUnityScript : MonoBehaviour, IGazeListener
     private bool _ShowGazeIndicator = true;
 
     private bool Looking;
+    private bool Blink;
 
     void Start()
     {
@@ -45,6 +46,7 @@ public class EyeTribeUnityScript : MonoBehaviour, IGazeListener
     {
         Point2D gazeCoords = GazeDataValidator.Instance.GetLastValidSmoothedGazeCoordinates();
         Looking = GazeDataValidator.Instance.GetCurrentEyeTrackerState();
+        Blink = GazeDataValidator.Instance.GetBlink();
         //Point2D gazeCoords2 = GazeDataValidator.Instance.
 
         Vector3 planeCoord = Vector3.zero;
@@ -97,8 +99,13 @@ public class EyeTribeUnityScript : MonoBehaviour, IGazeListener
     {
         _ShowGazeIndicator = !_ShowGazeIndicator;
     }
+    //Added by rasmus and anders
     public bool LookingAtScreen()
     {
         return !Looking;
+    }
+    public bool Blinking()
+    {
+        return Blink;
     }
 }
