@@ -8,7 +8,6 @@ public class ChairMovement : MonoBehaviour {
     bool _move = false;
     float timeLookedAt, timeToTrigger, animationDistance;
     Vector3 startPos;
-    public GameObject light;
 
 	// Use this for initialization
 	void Start () {
@@ -32,32 +31,10 @@ public class ChairMovement : MonoBehaviour {
             if (timeLookedAt >= timeToTrigger)
             {
                 _move = true;
-                StartCoroutine(blink());
                 Debug.Log("HAR KIGGET i OVER 2 SEKUNDER NU");
             }
             return;
         }
         timeLookedAt = 0;
 	}
-
-    IEnumerator blink()
-    {
-        if(animationDistance < 1) { 
-            light.SetActive(false);
-            yield return new WaitForSeconds(0.1f);
-            light.SetActive(true);
-            yield return new WaitForSeconds(0.1f);
-            light.SetActive(false);
-            yield return new WaitForSeconds(0.1f);
-            light.SetActive(true);
-            yield return new WaitForSeconds(0.1f);
-            light.SetActive(false);
-            yield return new WaitForSeconds(0.1f);
-            light.SetActive(true);
-            yield return new WaitForSeconds(0.1f);
-            light.SetActive(false);
-            yield return new WaitForSeconds(0.1f);
-            light.SetActive(true);
-        }
-    }
 }
