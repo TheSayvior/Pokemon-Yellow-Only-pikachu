@@ -12,6 +12,9 @@ using System.Linq;
 using System.Text;
 using TETCSharpClient;
 using TETCSharpClient.Data;
+// Added by rasmus and anders
+using System.Diagnostics;
+// end
 using UnityEngine;
 
 /// <summary>
@@ -49,6 +52,8 @@ class GazeDataValidator
 
     //Added By Ander & Rasmus
     protected bool _EyeTrackerStateFail;
+    protected bool _UserBlinked;
+    protected float _MillisTimeBetweenMeasurements = 0.0f;
     // End
     #endregion
 
@@ -85,11 +90,22 @@ class GazeDataValidator
         double userDist = 0d;
         Point2D eyeDistVecHalf = null;
         GazeData gd;
+
+        
+
         lock (_GazeFrameCache)
         {
+            //Added By Ander & Rasmus
+            //Stopwatch stopWatch = new Stopwatch();
+            //stopWatch.Start();
+            // end
             for (int i = _GazeFrameCache.Count; --i >= 0; )
             {
                 gd = _GazeFrameCache.ElementAt(i);
+                //Added By Ander & Rasmus
+                _EyeTrackerStateFail = false;
+                _MillisTimeBetweenMeasurements = DEFAULT_CACHE_TIME_FRAME_MILLIS / _GazeFrameCache.Count;
+                // end
 
                 // if no tracking problems, then cache eye data
                 if ((gd.State & NO_TRACKING_MASK) == 0)
@@ -124,16 +140,28 @@ class GazeDataValidator
                         gazeCoordsSmooth = gd.SmoothedCoordinates;
                     }
                 }
-                //Added By Ander & Rasmus
-                else
-                {
-                    _EyeTrackerStateFail = true;
-                }
-                // end
 
                 // break loop if valid values found
                 if (null != userPos && null != gazeCoords)
+                {
+                    //Added By Ander & Rasmus
+                    //long ts = stopWatch.ElapsedMilliseconds;
+                    //UnityEngine.Debug.Log(500 - _MillisTimeBetweenMeasurements * i);
+
+                    if (500 - _MillisTimeBetweenMeasurements * i > 150 && 500 - _MillisTimeBetweenMeasurements * i < 400)
+                    {
+                        _UserBlinked = true;
+                        UnityEngine.Debug.Log("Blinked");
+                    } else
+                    {
+                        _UserBlinked = false;
+                    }
+                    // end
                     break;
+                }
+                //Added By Ander & Rasmus
+                _EyeTrackerStateFail = true;
+                // end
             }
 
             if (null != gazeCoords)
@@ -289,6 +317,11 @@ class GazeDataValidator
     public bool GetCurrentEyeTrackerState()
     {
         return _EyeTrackerStateFail;
+    }
+
+    public bool GetBlink()
+    {
+        return _UserBlinked;
     }
     //end
 

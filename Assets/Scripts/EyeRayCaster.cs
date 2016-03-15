@@ -3,7 +3,8 @@ using System.Collections;
 
 public class EyeRayCaster : MonoBehaviour {
 
-
+    //float timeLookedAt = 0f;
+    private GameObject _ActiveObject;
     private GameObject _GazeIndicator;
     // Use this for initialization
     void Start () {
@@ -17,9 +18,16 @@ public class EyeRayCaster : MonoBehaviour {
         {
             if(hit.transform.tag == "LookAtObject")
             {
-                Debug.Log("HIT");
-                hit.transform.gameObject.GetComponent<test>().RunEnum();
+                Debug.Log("rammer nu");
+                if (hit.transform.gameObject.GetComponent<ChairMovement>())
+                {
+                    _ActiveObject = hit.transform.gameObject;
+                    hit.transform.gameObject.GetComponent<ChairMovement>().LookedAt = true;
+                    return;
+                }
             }
+            _ActiveObject.GetComponent<ChairMovement>().LookedAt = false;
+            _ActiveObject = null;
         }
     }
 }
