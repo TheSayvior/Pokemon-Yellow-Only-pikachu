@@ -138,6 +138,9 @@ class GazeDataValidator
                     {
                         gazeCoords = gd.RawCoordinates;
                         gazeCoordsSmooth = gd.SmoothedCoordinates;
+
+                        //Saving dataset SO CALL ME MAYBE ****************************
+                        //System.IO.File.AppendAllText("D:\\data.txt", gazeCoordsSmooth.ToString() + Environment.NewLine);
                     }
                 }
 
