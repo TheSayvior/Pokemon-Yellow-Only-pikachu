@@ -6,11 +6,11 @@ public class BlinkMatafakaBlink : MonoBehaviour {
     public GameObject bulb;
     public bool StartBlink;
     bool running;
-    public float BlinkRangeMin, BlinkRangeMax, timesOfBlinks;
+    public float BlinkRangeMax;// timesOfBlinks;
     float timeBetweenBlinks;
     // Use this for initialization
     void Start () {
-        StartBlink = true;
+        //StartBlink = true;
 	}
 
     // Update is called once per frame
@@ -35,16 +35,16 @@ public class BlinkMatafakaBlink : MonoBehaviour {
 
     IEnumerator BlinkBitch()
     {
-        for(int i=0; i<timesOfBlinks; i++)
-        {
-            timeBetweenBlinks = Random.Range(BlinkRangeMin, BlinkRangeMax);
+        //for(int i=0; i<timesOfBlinks; i++)
+        //{
+            timeBetweenBlinks = Random.Range(0, BlinkRangeMax);
             turnOff();
             yield return new WaitForSeconds(timeBetweenBlinks);
-            timeBetweenBlinks = Random.Range(BlinkRangeMin, BlinkRangeMax);
+            timeBetweenBlinks = Random.Range(0, BlinkRangeMax);
             turnOn();
             yield return new WaitForSeconds(timeBetweenBlinks);
-        }
+       // }
         running = false;
-        StartBlink = false;
+       // StartBlink = false;
     }
 }
