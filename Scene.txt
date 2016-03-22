@@ -1,0 +1,29 @@
+Script:
+
+You start in bright enviroment (maybe in toilet looking in mirror)
+You walk around for an amount of time or when you reach a point.
+Then the light dim down.
+Some might blink, and some might not even be on.
+You hear a metal door sound, maybe a howl from something not human.
+Then all lights go out, and you only have normal night light.
+Then you can walk around the house and interact with chairs, lights, w.e
+
+
+
+Eye coords and pupil dialation data:
+
+Get data for 1-5 minutes walking in daylight.
+Get data for when the light changes.
+Get data for 1-5 minutes walking in nighttime.
+Get data for specific events, such as interactions with piano, chairs, sounds, w.e
+
+
+
+Ideas:
+
+When lights are turned off in BigRoom you can see the clock (maybe use that for something?)
+Mirror interaction when you turn around.
+Piano interaction. Play a scary tune?
+TV interaction. Some schratchy flimmer.
+When you step on stair, the steps makes noises. The higher you get the higher the sound, and more howling gets closer.
+Sofa glass table can break
