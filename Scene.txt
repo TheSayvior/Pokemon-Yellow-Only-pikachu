@@ -27,3 +27,7 @@ Piano interaction. Play a scary tune?
 TV interaction. Some schratchy flimmer.
 When you step on stair, the steps makes noises. The higher you get the higher the sound, and more howling gets closer.
 Sofa glass table can break
+cup on a table
+towels
+door
+paintings
