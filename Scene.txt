@@ -1,3 +1,14 @@
+lav et script der kan styre alt lys i scenen (tænd sluk intensitet, lyst mørkt)
+lige nu får vi dataen i {xxx,xxx} - prøv at visualiser det på en måde
+prøv at få pupil dialation data
+fiks spejlet på toilettet (det er for lyst)
+find et vindue eller noget der ligner
+tilføj evt. nogen af de "Ideas" som er længere nede.
+
+
+
+
+
 Script:
 
 You start in bright enviroment (maybe in toilet looking in mirror)
@@ -27,7 +38,7 @@ Piano interaction. Play a scary tune?
 TV interaction. Some schratchy flimmer.
 When you step on stair, the steps makes noises. The higher you get the higher the sound, and more howling gets closer.
 Sofa glass table can break
-cup on a table
-towels
+cup on a table interaction
+towels interaction
 door
 paintings
