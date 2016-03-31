@@ -7,6 +7,7 @@ public class LevelManagement : MonoBehaviour {
 
     public GameObject PressEToOpenDoor;
 
+    private AudioControl _ac;
     private EnemyController _enemy;
     private LightController _LightControl;
 
@@ -16,7 +17,7 @@ public class LevelManagement : MonoBehaviour {
     // Use this for initialization
     void Start () {
         RenderSettings.ambientIntensity = 0.2f;
-
+        _ac = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioControl>();
         _enemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyController>();
         _LightControl = this.gameObject.GetComponent<LightController>();
     }
@@ -45,17 +46,18 @@ public class LevelManagement : MonoBehaviour {
                 StartCoroutine(_LightControl.flashLightForSecounds(5.0f));
                 
 
-                //Open monter door
+                //Open monster door
                 MonsterDoorOpen.SetActive(true);
+                _ac.StopStartMusic();
+                _ac.StartScaryMusic();
+                _ac.StartMetalDoor();
+                _ac.PlayFlickering();
                 MonsterDoorClosed.SetActive(false);
 
-                RenderSettings.ambientIntensity = 0.03f;
+                RenderSettings.ambientIntensity = 0.01f;
 
                 //Activate Monster
                 _enemy.Hunting = true;
-
-                //Play MonsterDoorOpenSound
-                //Play door closed sound
 
             }
         }

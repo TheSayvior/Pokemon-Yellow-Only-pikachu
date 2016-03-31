@@ -8,10 +8,11 @@ public class LightController : MonoBehaviour {
     public float LightIntencity = 100f;
     float LightManipulationAmount = 200;
 
+    private AudioControl _ac;
     // Use this for initialization
     void Start () {
         _lightsources = GameObject.FindGameObjectsWithTag("LightSource");
-        
+        _ac = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioControl>();
 	}
 	
 	// Update is called once per frame
@@ -72,6 +73,7 @@ public class LightController : MonoBehaviour {
                 _lightsources[i].GetComponent<StartLightSettings>().ResetRange();
             }
         }
+        _ac.StopFlickering();
         yield return null;
     }
 }
