@@ -9,6 +9,8 @@ public class EnemyController : MonoBehaviour {
     public GameObject[] Rooms;
     public float GazeOnPlayerTime = 1.2f;
 
+    public bool Hunting = false;
+
     float _gazeOnPlayerTimer = 0;
     Vector3 _targetLocation;
     public bool _hasTagetLocation = false, _survey = false, _surveyingRunning = false, _playerSpottet = false;
@@ -29,6 +31,11 @@ public class EnemyController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (!Hunting)
+        {
+            return;
+        }
+
         
         //makes the animation of walking activate and deactivate
         if(!_aniController.GetBool("Walking") && this.gameObject.transform.position != _positionLastFrame)

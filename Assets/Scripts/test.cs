@@ -13,11 +13,6 @@ public class test : MonoBehaviour {
 	void Start () {
         current = GetComponent<Renderer>().material.color;
     }
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
     public void RunEnum()
     {

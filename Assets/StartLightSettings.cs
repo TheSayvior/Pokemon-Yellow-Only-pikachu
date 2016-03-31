@@ -25,7 +25,7 @@ public class StartLightSettings : MonoBehaviour {
         }
     }
 
-    public void ResetIntencity(float percent)
+    public void ResetIntencity()
     {
         _pointlight.intensity = _startIntencity;
         if (Spotlight)
@@ -43,7 +43,7 @@ public class StartLightSettings : MonoBehaviour {
         }
     }
 
-    public void ResetRange(float range)
+    public void ResetRange()
     {
         _pointlight.range = _startRange;
         if (Spotlight)
