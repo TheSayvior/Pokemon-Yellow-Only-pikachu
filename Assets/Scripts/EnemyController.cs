@@ -4,24 +4,26 @@ using System.Collections;
 
 public class EnemyController : MonoBehaviour {
 
-    public GameObject Player;
-    public Camera GhoulEyes;
+    public Camera GhoulEyeCam;
     public GameObject[] Rooms;
+    public GameObject GhoulEyes;
     public float GazeOnPlayerTime = 1.2f;
     public float fieldOfViewAngle = 110f;
 
     public bool Hunting = false;
 
-    float _gazeOnPlayerTimer = 0;
-    Vector3 _targetLocation, _lastPlayerSighting;
+    //public variables that are not to be changed in inspector
+    public Vector3 lastPlayerSighting;
     public bool _hasTagetLocation = false, _survey = false, _surveyingRunning = false, _playerSpottet = false;
 
-    private bool _playerInSight = false;
+    public bool PlayerInSight = false;
+
+    Vector3 _targetLocation;
+    float _gazeOnPlayerTimer = 0;
     NavMeshAgent _enemy;
     Animator _aniController;
     Rigidbody _rigidBody;
-    Renderer _playerHeadRenderer;
-    SphereCollider _eyeSightRange;
+    Renderer _playerHeadRenderer;  
 
     Vector3 _positionLastFrame;
 	// Use this for initialization
@@ -30,7 +32,6 @@ public class EnemyController : MonoBehaviour {
         _aniController = this.gameObject.GetComponent<Animator>();
         _rigidBody = this.gameObject.GetComponent<Rigidbody>();
         _positionLastFrame = this.gameObject.transform.position;
-        _eyeSightRange = GetComponent<SphereCollider>();
     }
 	
 	// Update is called once per frame
@@ -41,7 +42,7 @@ public class EnemyController : MonoBehaviour {
         }
       
         //makes the animation of walking activate and deactivate
-        if(!_aniController.GetBool("Walking") && this.gameObject.transform.position != _positionLastFrame)
+        /*if(!_aniController.GetBool("Walking") && this.gameObject.transform.position != _positionLastFrame)
         {
             _aniController.SetBool("Walking", true);
         }
@@ -51,10 +52,10 @@ public class EnemyController : MonoBehaviour {
         }
 
         _positionLastFrame = this.gameObject.transform.position;
-
-        if (_playerInSight)
+        */
+        if (PlayerInSight)
         {
-            _enemy.SetDestination(_lastPlayerSighting);
+            ChasePlayer();
         }
 
         if (_surveyingRunning)
@@ -62,7 +63,7 @@ public class EnemyController : MonoBehaviour {
             return;
         }
 
-        if (_survey)
+        if (_survey && _hasTagetLocation)
         {
             StartCoroutine(Survey());
             return;
@@ -71,7 +72,6 @@ public class EnemyController : MonoBehaviour {
         if (_enemy.remainingDistance == 0 && _hasTagetLocation)
         {
             _survey = true;
-            _hasTagetLocation = false;
             return;
         }
         if (!_hasTagetLocation && !_surveyingRunning)
@@ -91,66 +91,63 @@ public class EnemyController : MonoBehaviour {
 
     IEnumerator Survey()
     {
-        while (!_playerInSight)
-        {
-            _surveyingRunning = true;
-            _enemy.SetDestination(_targetLocation + new Vector3(Random.Range(-0.5f, 0.5f), 0, Random.Range(-0.5f, 0.5f)));
-            yield return new WaitForSeconds(1.5f);
-            _enemy.SetDestination(_targetLocation + new Vector3(Random.Range(-0.5f, 0.5f), 0, Random.Range(-0.5f, 0.5f)));
-            yield return new WaitForSeconds(1.5f);
-            _enemy.SetDestination(_targetLocation + new Vector3(Random.Range(-0.5f, 0.5f), 0, Random.Range(-0.5f, 0.5f)));
-            yield return new WaitForSeconds(2);
-        }
+        _hasTagetLocation = false;
         _survey = false;
+
+        _surveyingRunning = true;
+        _enemy.SetDestination(_targetLocation + new Vector3(Random.Range(-0.5f, 0.5f), 0, Random.Range(-0.5f, 0.5f)));
+
+        float _startTime = Time.time;
+
+        while (_startTime + 1.5f > Time.time && !PlayerInSight) // wait for 1.5 sec
+        {
+            if (PlayerInSight)
+            {
+                break;
+            }
+            yield return null;
+        }
+
+        _enemy.SetDestination(_targetLocation + new Vector3(Random.Range(-0.5f, 0.5f), 0, Random.Range(-0.5f, 0.5f)));
+
+        _startTime = Time.time;
+
+        while (_startTime + 1.5f > Time.time && !PlayerInSight) // wait for 1.5 sec
+        {
+            if (PlayerInSight)
+            {
+                break;
+            }
+            yield return null;
+        }
+
+        _enemy.SetDestination(_targetLocation + new Vector3(Random.Range(-0.5f, 0.5f), 0, Random.Range(-0.5f, 0.5f)));
+
+        _startTime = Time.time;
+
+        while (_startTime + 2f > Time.time && !PlayerInSight) // wait for 2 sec
+        {
+            if (PlayerInSight)
+            {
+                break;
+            }
+            yield return null;
+        }
         _surveyingRunning = false;
         yield return null;
     }
 
-    IEnumerator Chase()
+    public void ChasePlayer()
     {
-        yield return null;
+        _targetLocation = lastPlayerSighting;
+        _enemy.SetDestination(_targetLocation);
+        _hasTagetLocation = true;
+        _survey = false;
+        _surveyingRunning = false;
     }
 
-    void OnTriggerStay(Collider other)
+    public void LookingForPlayer()
     {
-        if (other.gameObject.tag == "Player")
-        {
-            Debug.Log("PlayerInRange");
-            _playerInSight = false;
 
-            Vector3 direction = other.transform.position - transform.position;
-            float angle = Vector3.Angle(direction, transform.forward);
-
-            // If the angle between forward and where the player is, is less than half the angle of view...
-            if (angle < fieldOfViewAngle * 0.5f)
-            {
-                RaycastHit hit;
-
-                // ... and if a raycast towards the player hits something...
-                if (Physics.Raycast(this.transform.position, direction.normalized, out hit, _eyeSightRange.radius))
-                {
-                    Debug.Log(hit.collider.name);
-                    // ... and if the raycast hits the player...
-                    if (hit.collider.gameObject.tag == "Player")
-                    {
-                        // ... the player is in sight.
-                        Debug.DrawRay(transform.position, direction.normalized, Color.green);
-                        _playerInSight = true;
-                        Debug.Log(_playerInSight);
-
-                        // Set the last global sighting is the players current position.
-                        _lastPlayerSighting = Player.transform.position;
-
-                    }
-                }
-            }
-        }
-    }
-    void OnTriggerExit(Collider other)
-    {
-        // If the player leaves the trigger zone...
-        if (other.gameObject.tag == "Player")
-            // ... the player is not in sight.
-            _playerInSight = false;
     }
 }

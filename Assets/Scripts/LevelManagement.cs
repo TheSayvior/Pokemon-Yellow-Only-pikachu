@@ -43,7 +43,7 @@ public class LevelManagement : MonoBehaviour {
                 FirstTimeOpening = false;
 
                 //Mess with the lights
-                StartCoroutine(_LightControl.flashLightForSecounds(5.0f));
+                StartCoroutine(_LightControl.FlashAllLightForSecounds(5.0f));
                 
 
                 //Open monster door

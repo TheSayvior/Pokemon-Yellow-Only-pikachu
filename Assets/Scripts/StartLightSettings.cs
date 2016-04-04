@@ -3,8 +3,8 @@ using System.Collections;
 
 public class StartLightSettings : MonoBehaviour {
 
-    public float _startRange = 0.0f;
-    public float _startIntencity = 0.0f;
+    float _startRange = 0.0f;
+    float _startIntencity = 0.0f;
 
     public Light Spotlight;
     Light _pointlight;

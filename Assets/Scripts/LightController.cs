@@ -4,8 +4,6 @@ using System.Collections;
 public class LightController : MonoBehaviour {
 
     GameObject[] _lightsources;
-    public float LightRange = 100f;
-    public float LightIntencity = 100f;
     float LightManipulationAmount = 200;
 
     private AudioControl _ac;
@@ -14,31 +12,8 @@ public class LightController : MonoBehaviour {
         _lightsources = GameObject.FindGameObjectsWithTag("LightSource");
         _ac = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioControl>();
 	}
-	
-	// Update is called once per frame
-	/*void Update () {
-       for(int i = 0; i< _lightsources.Length; i++)
-        {
-            if (_lightsources[i].GetComponent<StartLightSettings>())
-            {
-                //Debug.Log("light found");
-                _lightsources[i].GetComponent<StartLightSettings>().AdjustRange(LightRange);
 
-                if (Random.Range(-1, 1) < 0 && _lightsources[i].GetComponent<Light>().intensity>0.3f)
-                {
-                    _lightsources[i].GetComponent<StartLightSettings>().AdjustIntencity(100 - LightManipulationAmount * Time.deltaTime);
-                    _lightsources[i].GetComponent<StartLightSettings>().AdjustRange(100 - LightManipulationAmount * Time.deltaTime);
-                }
-                else if (_lightsources[i].GetComponent<Light>().intensity < 1.3f)
-                {
-                    _lightsources[i].GetComponent<StartLightSettings>().AdjustIntencity(100 + LightManipulationAmount * Time.deltaTime);
-                    _lightsources[i].GetComponent<StartLightSettings>().AdjustRange(100 + LightManipulationAmount * Time.deltaTime);
-                }
-            }
-        }
-	}*/
-
-    public IEnumerator flashLightForSecounds(float time)
+    public IEnumerator FlashAllLightForSecounds(float time)
     {
         float _startTime = Time.time;
 
@@ -49,7 +24,7 @@ public class LightController : MonoBehaviour {
                 if (_lightsources[i].GetComponent<StartLightSettings>())
                 {
                     //Debug.Log("light found");
-                    _lightsources[i].GetComponent<StartLightSettings>().AdjustRange(LightRange);
+                    _lightsources[i].GetComponent<StartLightSettings>().AdjustRange(100);
 
                     if (Random.Range(-1, 1) < 0 && _lightsources[i].GetComponent<Light>().intensity > 0.3f)
                     {
@@ -62,6 +37,10 @@ public class LightController : MonoBehaviour {
                         _lightsources[i].GetComponent<StartLightSettings>().AdjustRange(100 + LightManipulationAmount * Time.deltaTime);
                     }
                 }
+                else
+                {
+                    Debug.Log("StartLightSettings script is missing from " + _lightsources[i].name);
+                }
             }
             yield return null;            
         }
@@ -73,6 +52,49 @@ public class LightController : MonoBehaviour {
                 _lightsources[i].GetComponent<StartLightSettings>().ResetRange();
             }
         }
+        _ac.StopFlickering();
+        yield return null;
+    }
+
+    //used to blink with a single light, give it the point light gameobject and the time in which it should blink
+    public IEnumerator FlashLightForSecounds(GameObject light, float time)
+    {
+        float _startTime = Time.time;
+
+        StartLightSettings _individualLight = light.GetComponent<StartLightSettings>();
+
+        if (!_individualLight)
+        {
+            Debug.Log("StartLightSettings script is missing from " + light.name);
+            yield break;
+        }
+
+        while (_startTime + time > Time.time)
+        {
+
+            if (_individualLight)
+            {
+                //Debug.Log("light found");
+                _individualLight.AdjustRange(100);
+
+                if (Random.Range(-1, 1) < 0 && light.GetComponent<Light>().intensity > 0.3f)
+                {
+                    _individualLight.AdjustIntencity(100 - LightManipulationAmount * Time.deltaTime);
+                    _individualLight.AdjustRange(100 - LightManipulationAmount * Time.deltaTime);
+                }
+                else if (light.GetComponent<Light>().intensity < 1.3f)
+                {
+                    _individualLight.AdjustIntencity(100 + LightManipulationAmount * Time.deltaTime);
+                    _individualLight.AdjustRange(100 + LightManipulationAmount * Time.deltaTime);
+                }
+            }
+
+            yield return null;
+        }
+       
+        _individualLight.ResetIntencity();
+        _individualLight.ResetRange();
+    
         _ac.StopFlickering();
         yield return null;
     }
