@@ -7,6 +7,29 @@ public class AudioControl : MonoBehaviour {
     public AudioSource ScaryMusic;
     public AudioSource Flickering;
     public AudioSource MetalDoor;
+    public AudioSource Dragging;
+    public AudioSource ScareSound;
+    public AudioSource PianoTune;
+
+    public void StartPiano()
+    {
+        PianoTune.Play();
+    }
+
+    public void StartScare()
+    {
+        ScareSound.Play();
+    }
+
+    public void StopDragging()
+    {
+        Dragging.Stop();
+    }
+
+    public void StartDragging()
+    {
+        Dragging.Play();
+    }
 
     public void StopStartMusic()
     {

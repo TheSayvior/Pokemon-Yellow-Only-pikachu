@@ -7,6 +7,9 @@ public class LightController : MonoBehaviour {
     float LightManipulationAmount = 200;
 
     private AudioControl _ac;
+    //GameObject pointLight;
+    //float timeForBlink;
+
     // Use this for initialization
     void Start () {
         _lightsources = GameObject.FindGameObjectsWithTag("LightSource");
@@ -97,5 +100,10 @@ public class LightController : MonoBehaviour {
     
         _ac.StopFlickering();
         yield return null;
+    }
+
+    public void OneLampBlink(GameObject light, float time)
+    {
+        StartCoroutine(FlashLightForSecounds(light, time));
     }
 }
