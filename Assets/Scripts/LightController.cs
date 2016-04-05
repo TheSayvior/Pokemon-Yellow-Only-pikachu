@@ -74,7 +74,6 @@ public class LightController : MonoBehaviour {
 
             if (_individualLight)
             {
-                //Debug.Log("light found");
                 _individualLight.AdjustRange(100);
 
                 if (Random.Range(-1, 1) < 0 && light.GetComponent<Light>().intensity > 0.3f)
