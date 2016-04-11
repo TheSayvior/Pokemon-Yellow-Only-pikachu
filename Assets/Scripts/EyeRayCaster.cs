@@ -31,9 +31,30 @@ public class EyeRayCaster : MonoBehaviour {
                     hit.transform.gameObject.GetComponent<PianoTrigger>().LookedAt = true;
                     return;
                 }
+                if (hit.transform.gameObject.GetComponent<ToiletTrigger>())
+                {
+                    _ActiveObject = hit.transform.gameObject;
+                    hit.transform.gameObject.GetComponent<ToiletTrigger>().LookedAt = true;
+                    return;
+                }
+                if (hit.transform.gameObject.GetComponent<MirrorTrigger>())
+                {
+                    _ActiveObject = hit.transform.gameObject;
+                    hit.transform.gameObject.GetComponent<MirrorTrigger>().LookedAt = true;
+                    return;
+                }
+                if (hit.transform.gameObject.GetComponent<TVTrigger>())
+                {
+                    _ActiveObject = hit.transform.gameObject;
+                    hit.transform.gameObject.GetComponent<TVTrigger>().LookedAt = true;
+                    return;
+                }
             }
             _ActiveObject.GetComponent<ChairMovement>().LookedAt = false;
             _ActiveObject.GetComponent<PianoTrigger>().LookedAt = false;
+            _ActiveObject.GetComponent<MirrorTrigger>().LookedAt = false;
+            _ActiveObject.GetComponent<ToiletTrigger>().LookedAt = false;
+            _ActiveObject.GetComponent<TVTrigger>().LookedAt = false;
             _ActiveObject = null;
         }
     }

@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class LevelManagement : MonoBehaviour {
 
     public GameObject MonsterDoorOpen, MonsterDoorClosed;
 
     public GameObject PressEToOpenDoor;
+    public Text objectiveText;
 
     private AudioControl _ac;
     private EnemyController _enemy;
@@ -16,6 +18,7 @@ public class LevelManagement : MonoBehaviour {
                    
     // Use this for initialization
     void Start () {
+        objectiveText.text = "Find the main entrance";
         RenderSettings.ambientIntensity = 0.2f;
         _ac = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioControl>();
         _enemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyController>();
@@ -36,6 +39,9 @@ public class LevelManagement : MonoBehaviour {
 
             if (Input.GetKeyDown("e") && FirstTimeOpening)
             {
+                // change objective
+                objectiveText.text = "Find the hidden key";
+
                 //Remove Text
                 PressEToOpenDoor.SetActive(false);
 

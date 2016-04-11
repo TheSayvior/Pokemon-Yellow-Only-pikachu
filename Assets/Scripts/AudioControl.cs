@@ -10,6 +10,40 @@ public class AudioControl : MonoBehaviour {
     public AudioSource Dragging;
     public AudioSource ScareSound;
     public AudioSource PianoTune;
+    public AudioSource ScaryVoice;
+    public AudioSource Screamer;
+    public AudioSource StaticTV;
+    public AudioSource ToiletFlush;
+
+    public void PlayScaryVoice()
+    {
+        ScaryVoice.Play();
+    }
+
+    public void ScreamerStop()
+    {
+        Screamer.Stop();
+    }
+
+    public void ScreamerStart()
+    {
+        Screamer.Play();
+    }
+
+    public void StopTV()
+    {
+        StaticTV.Stop();
+    }
+
+    public void StartTV()
+    {
+        StaticTV.Play();
+    }
+
+    public void StartFlush()
+    {
+        ToiletFlush.Play();
+    }
 
     public void StartPiano()
     {
