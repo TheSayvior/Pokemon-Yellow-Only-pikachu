@@ -21,6 +21,12 @@ public class EyeTribeUnityScript : MonoBehaviour, IGazeListener
     private bool Looking;
     private bool Blink;
 
+    void Awake()
+    {
+        //Create log file for pupil dialation
+        System.IO.File.Create("/Users/Rasmus Jensen/Documents/DTU_Master_Thesis/Assets/Data/PupilDialation.txt");
+    }
+
     void Start()
     {
         _Camera = GetComponentInChildren<Camera>();
@@ -37,7 +43,7 @@ public class EyeTribeUnityScript : MonoBehaviour, IGazeListener
         GazeManager.Instance.AddGazeListener(this);
 
         //Create log file for pupil dialation
-        System.IO.File.Create("/Users/Rasmus Jensen/Documents/DTU_Master_Thesis/Assets/Data/PupilDialation.txt");
+        //System.IO.File.Create("/Users/Rasmus Jensen/Documents/DTU_Master_Thesis/Assets/Data/PupilDialation.txt");
     }
 
     public void OnGazeUpdate(GazeData gazeData)
@@ -79,7 +85,7 @@ public class EyeTribeUnityScript : MonoBehaviour, IGazeListener
         }
         else
         {
-            System.IO.File.AppendAllText("/Users/Rasmus Jensen/Documents/DTU_Master_Thesis/Assets/Data/PupilDialation.txt", "\n[" + Time.time + ", " + 0 + ", " + 0 + ", " + 0 + "]");
+            //System.IO.File.AppendAllText("/Users/Rasmus Jensen/Documents/DTU_Master_Thesis/Assets/Data/PupilDialation.txt", "\n[" + Time.time + ", " + 0 + ", " + 0 + ", " + 0 + "]");
         }
     }
 

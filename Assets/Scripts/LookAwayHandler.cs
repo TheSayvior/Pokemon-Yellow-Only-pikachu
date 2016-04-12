@@ -13,7 +13,7 @@ public class LookAwayHandler : MonoBehaviour {
     // Use this for initialization
     void Start () {
         _GazeIndicator = GameObject.FindGameObjectWithTag("gazeIndicator");
-        System.IO.File.Delete("/Users/Rasmus Jensen/Documents/DTU_Master_Thesis/Assets/Data/" + FileName + ".txt");
+        System.IO.File.Delete(Application.dataPath + "/Data/" + FileName + ".txt");
     }
 	
 	// Update is called once per frame
@@ -21,15 +21,15 @@ public class LookAwayHandler : MonoBehaviour {
         //Checks if we are looking at the screen
         if (_GazeIndicator.transform.parent.GetComponent<EyeTribeUnityScript>().LookingAtScreen())
         {
-            System.IO.File.AppendAllText("/Users/Rasmus Jensen/Documents/DTU_Master_Thesis/Assets/Data/" + FileName + ".txt", "\n[" + Time.time + ", 0]");
+            System.IO.File.AppendAllText(Application.dataPath + "/Data/" + FileName + ".txt", "\n[" + Time.time + ", 0]");
         } else
         {
-            System.IO.File.AppendAllText("/Users/Rasmus Jensen/Documents/DTU_Master_Thesis/Assets/Data/" + FileName + ".txt", "\n[" + Time.time + ", 1]");
+            System.IO.File.AppendAllText(Application.dataPath + "/Data/" + FileName + ".txt", "\n[" + Time.time + ", 1]");
         }
         //Did We blink?
         if (_GazeIndicator.transform.parent.GetComponent<EyeTribeUnityScript>().Blinking() && !blinkTimer)
         {
-            System.IO.File.AppendAllText("/Users/Rasmus Jensen/Documents/DTU_Master_Thesis/Assets/Data/" + FileName + ".txt", "\n[" + Time.time + ", 2]");
+            System.IO.File.AppendAllText(Application.dataPath + "/Data/" + FileName + ".txt", "\n[" + Time.time + ", 2]");
             Debug.Log("You blinked");
             StartCoroutine(waitForNextBlink());
         }
