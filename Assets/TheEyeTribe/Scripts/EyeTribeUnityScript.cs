@@ -20,11 +20,12 @@ public class EyeTribeUnityScript : MonoBehaviour, IGazeListener
     private Eye LeftEye, RightEye;
     private bool Looking;
     private bool Blink;
+    string FileName = "PupilDialation";
 
     void Awake()
     {
         //Create log file for pupil dialation
-        System.IO.File.Create("/Users/Rasmus Jensen/Documents/DTU_Master_Thesis/Assets/Data/PupilDialation.txt");
+        System.IO.File.Create(Application.dataPath + "/Data/" + FileName + ".txt");
     }
 
     void Start()
@@ -81,11 +82,11 @@ public class EyeTribeUnityScript : MonoBehaviour, IGazeListener
         RightEye = GazeDataValidator.Instance.GetLastValidRightEye();
         if (LeftEye != null && RightEye != null)
         {
-            System.IO.File.AppendAllText("/Users/Rasmus Jensen/Documents/DTU_Master_Thesis/Assets/Data/PupilDialation.txt", "\n[" + Time.time + ", " + LeftEye.PupilSize + ", " + RightEye.PupilSize + ", " + (LeftEye.PupilSize + RightEye.PupilSize) / 2 + "]");
+            System.IO.File.AppendAllText(Application.dataPath + "/Data/" + FileName + ".txt", "\n[" + Time.time + ", " + LeftEye.PupilSize + ", " + RightEye.PupilSize + ", " + (LeftEye.PupilSize + RightEye.PupilSize) / 2 + "]");
         }
         else
         {
-            //System.IO.File.AppendAllText("/Users/Rasmus Jensen/Documents/DTU_Master_Thesis/Assets/Data/PupilDialation.txt", "\n[" + Time.time + ", " + 0 + ", " + 0 + ", " + 0 + "]");
+            //System.IO.File.AppendAllText(Application.dataPath + " / Data / " + FileName + ".txt", "\n[" + Time.time + ", " + 0 + ", " + 0 + ", " + 0 + "]");
         }
     }
 

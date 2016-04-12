@@ -52,11 +52,16 @@ public class EyeRayCaster : MonoBehaviour {
             }
             if (_ActiveObject != null)
             {
-                _ActiveObject.GetComponent<ChairMovement>().LookedAt = false;
-                _ActiveObject.GetComponent<PianoTrigger>().LookedAt = false;
-                _ActiveObject.GetComponent<MirrorTrigger>().LookedAt = false;
-                _ActiveObject.GetComponent<ToiletTrigger>().LookedAt = false;
-                _ActiveObject.GetComponent<TVTrigger>().LookedAt = false;
+                if(_ActiveObject.GetComponent<ChairMovement>() != null)
+                    _ActiveObject.GetComponent<ChairMovement>().LookedAt = false;
+                if (_ActiveObject.GetComponent<PianoTrigger>() != null)
+                    _ActiveObject.GetComponent<PianoTrigger>().LookedAt = false;
+                if (_ActiveObject.GetComponent<MirrorTrigger>() != null)
+                    _ActiveObject.GetComponent<MirrorTrigger>().LookedAt = false;
+                if (_ActiveObject.GetComponent<ToiletTrigger>() != null)
+                    _ActiveObject.GetComponent<ToiletTrigger>().LookedAt = false;
+                if (_ActiveObject.GetComponent<TVTrigger>() != null)
+                    _ActiveObject.GetComponent<TVTrigger>().LookedAt = false;
             }
             _ActiveObject = null;
         }
