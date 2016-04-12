@@ -232,6 +232,8 @@ class GazeDataValidator
                 _LastValidRightEye = null;
                 _LastValidLeftEye = null;
             }
+            
+            //System.IO.File.AppendAllText("/Users/Rasmus Jensen/Documents/DTU_Master_Thesis/Assets/Data/PupilDialation.txt", "[" + Time.time + ", " + _LastValidLeftEye.PupilSize +  ", " + _LastValidRightEye.PupilSize + ", " + (_LastValidLeftEye.PupilSize + _LastValidRightEye.PupilSize)/2 + "]");
         }
     }
 

@@ -47,7 +47,6 @@ public class GhoulSound : MonoBehaviour
     {
         Growling = true;
         AudioController.PlayGhoulGrowl();
-        Debug.Log("Played Growl");
         yield return new WaitForSeconds(8);
         Growling = false;
         yield return null;
@@ -57,7 +56,6 @@ public class GhoulSound : MonoBehaviour
     {
         breathing = true;
         AudioController.PlayGhoulBreath();
-        Debug.Log("Played Breath");
         yield return new WaitForSeconds(8);
         breathing = false;
         yield return null;

@@ -17,6 +17,7 @@ public class EyeTribeUnityScript : MonoBehaviour, IGazeListener
     private GameObject _GazeIndicator;
     private bool _ShowGazeIndicator = true;
 
+    private Eye LeftEye, RightEye;
     private bool Looking;
     private bool Blink;
 
@@ -34,6 +35,9 @@ public class EyeTribeUnityScript : MonoBehaviour, IGazeListener
 
         //register for gaze updates
         GazeManager.Instance.AddGazeListener(this);
+
+        //Create log file for pupil dialation
+        System.IO.File.Create("/Users/Rasmus Jensen/Documents/DTU_Master_Thesis/Assets/Data/PupilDialation.txt");
     }
 
     public void OnGazeUpdate(GazeData gazeData)
@@ -65,6 +69,18 @@ public class EyeTribeUnityScript : MonoBehaviour, IGazeListener
             _GazeIndicator.SetActive(true);
         else if (!_ShowGazeIndicator && _GazeIndicator.activeSelf)
             _GazeIndicator.SetActive(false);
+
+        //added by Rasmus Jensen
+        LeftEye = GazeDataValidator.Instance.GetLastValidLeftEye();
+        RightEye = GazeDataValidator.Instance.GetLastValidRightEye();
+        if (LeftEye != null && RightEye != null)
+        {
+            System.IO.File.AppendAllText("/Users/Rasmus Jensen/Documents/DTU_Master_Thesis/Assets/Data/PupilDialation.txt", "\n[" + Time.time + ", " + LeftEye.PupilSize + ", " + RightEye.PupilSize + ", " + (LeftEye.PupilSize + RightEye.PupilSize) / 2 + "]");
+        }
+        else
+        {
+            System.IO.File.AppendAllText("/Users/Rasmus Jensen/Documents/DTU_Master_Thesis/Assets/Data/PupilDialation.txt", "\n[" + Time.time + ", " + 0 + ", " + 0 + ", " + 0 + "]");
+        }
     }
 
     public void FixedUpdate()
