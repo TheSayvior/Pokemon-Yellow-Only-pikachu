@@ -14,6 +14,7 @@ public class AudioControl : MonoBehaviour {
     public AudioSource Screamer;
     public AudioSource StaticTV;
     public AudioSource ToiletFlush;
+    public AudioSource GhoulGrowl, GhoulBreath;
 
     public void PlayScaryVoice()
     {
@@ -89,4 +90,24 @@ public class AudioControl : MonoBehaviour {
     {
         MetalDoor.Play();
     }
+
+    public void PlayGhoulGrowl()
+    {
+        GhoulGrowl.Play();
+    }
+    public void StopGhoulGrowl()
+    {
+        GhoulGrowl.Stop();
+    }
+
+    public void PlayGhoulBreath()
+    {
+        GhoulBreath.Play();
+    }
+
+    public void StopGhoulBreath()
+    {
+        GhoulBreath.Stop();
+    }
+
 }
