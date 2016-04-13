@@ -12,6 +12,7 @@ public class LevelManagement : MonoBehaviour {
     private AudioControl _ac;
     private EnemyController _enemy;
     private LightController _LightControl;
+    private EyeRayCaster _triggerZoneManagement;
 
     public static bool FirstTimeOpening = true,
                  SecoundTimeOpening = false;
@@ -23,6 +24,7 @@ public class LevelManagement : MonoBehaviour {
         _ac = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioControl>();
         _enemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyController>();
         _LightControl = this.gameObject.GetComponent<LightController>();
+        _triggerZoneManagement = this.gameObject.GetComponent<EyeRayCaster>();
     }
 	
 	// Update is called once per frame
@@ -50,7 +52,9 @@ public class LevelManagement : MonoBehaviour {
 
                 //Mess with the lights
                 StartCoroutine(_LightControl.FlashAllLightForSecounds(5.0f));
-                
+
+                //Enable TriggerZones
+                _triggerZoneManagement.StartTriggerZones = true;
 
                 //Open monster door
                 MonsterDoorOpen.SetActive(true);
