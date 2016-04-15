@@ -20,12 +20,14 @@ public class EyeTribeUnityScript : MonoBehaviour, IGazeListener
     private Eye LeftEye, RightEye;
     private bool Looking;
     private bool Blink;
-    string FileName = "PupilDialation";
+    string FileName1 = "PupilDialationX";
+    string FileName2 = "PupilDialationY";
 
     void Awake()
     {
         //Create log file for pupil dialation
-        System.IO.File.Create(Application.dataPath + "/Data/" + FileName + ".txt");
+        System.IO.File.Create(Application.dataPath + "/Data/Eye/" + FileName1 + ".txt");
+        System.IO.File.Create(Application.dataPath + "/Data/Eye/" + FileName2 + ".txt");
     }
 
     void Start()
@@ -82,7 +84,8 @@ public class EyeTribeUnityScript : MonoBehaviour, IGazeListener
         RightEye = GazeDataValidator.Instance.GetLastValidRightEye();
         if (LeftEye != null && RightEye != null)
         {
-            System.IO.File.AppendAllText(Application.dataPath + "/Data/" + FileName + ".txt", "\n[" + Time.time + ", " + LeftEye.PupilSize + ", " + RightEye.PupilSize + ", " + (LeftEye.PupilSize + RightEye.PupilSize) / 2 + "]");
+            System.IO.File.AppendAllText(Application.dataPath + "/Data/Eye/" + FileName1 + ".txt", Time.time + "\n");
+            System.IO.File.AppendAllText(Application.dataPath + "/Data/Eye/" + FileName2 + ".txt", (LeftEye.PupilSize + RightEye.PupilSize) / 2 + "\n");
         }
         else
         {
