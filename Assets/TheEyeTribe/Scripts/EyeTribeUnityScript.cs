@@ -10,6 +10,7 @@ using UnityEngine;
 using System.Collections;
 using TETCSharpClient;
 using TETCSharpClient.Data;
+using System;
 
 public class EyeTribeUnityScript : MonoBehaviour, IGazeListener
 {
@@ -84,8 +85,8 @@ public class EyeTribeUnityScript : MonoBehaviour, IGazeListener
         RightEye = GazeDataValidator.Instance.GetLastValidRightEye();
         if (LeftEye != null && RightEye != null)
         {
-            System.IO.File.AppendAllText(Application.dataPath + "/Data/Eye/" + FileName1 + ".txt", Time.time + "\n");
-            System.IO.File.AppendAllText(Application.dataPath + "/Data/Eye/" + FileName2 + ".txt", (LeftEye.PupilSize + RightEye.PupilSize) / 2 + "\n");
+            System.IO.File.AppendAllText(Application.dataPath + "/Data/Eye/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
+            System.IO.File.AppendAllText(Application.dataPath + "/Data/Eye/" + FileName2 + ".txt", (LeftEye.PupilSize + RightEye.PupilSize) / 2 + Environment.NewLine);
         }
         else
         {

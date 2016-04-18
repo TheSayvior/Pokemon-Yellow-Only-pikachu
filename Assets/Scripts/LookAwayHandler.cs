@@ -14,28 +14,28 @@ public class LookAwayHandler : MonoBehaviour {
     // Use this for initialization
     void Start () {
         _GazeIndicator = GameObject.FindGameObjectWithTag("gazeIndicator");
-        System.IO.File.Create(Application.dataPath + "/Data/Looking" + FileName1 + ".txt");
-        System.IO.File.Create(Application.dataPath + "/Data/Looking" + FileName2 + ".txt");
+        System.IO.File.Create(Application.dataPath + "/Data/Looking/" + FileName1 + ".txt");
+        System.IO.File.Create(Application.dataPath + "/Data/Looking/" + FileName2 + ".txt");
     }
 	
 	// Update is called once per frame
 	void Update () {
-        //Checks if we are looking at the screen
-        if (_GazeIndicator.transform.parent.GetComponent<EyeTribeUnityScript>().LookingAtScreen())
-        {
-            System.IO.File.AppendAllText(Application.dataPath + "/Data/Looking" + FileName1 + ".txt", Time.time + "\n");
-            System.IO.File.AppendAllText(Application.dataPath + "/Data/Looking" + FileName2 + ".txt", "0" +  "\n");
-        } else
-        {
-            System.IO.File.AppendAllText(Application.dataPath + "/Data/Looking" + FileName1 + ".txt", Time.time + "\n");
-            System.IO.File.AppendAllText(Application.dataPath + "/Data/Looking" + FileName2 + ".txt", "1" + "\n");
-        }
         //Did We blink?
         if (_GazeIndicator.transform.parent.GetComponent<EyeTribeUnityScript>().Blinking() && !blinkTimer)
         {
-            System.IO.File.AppendAllText(Application.dataPath + "/Data/Looking" + FileName1 + ".txt", Time.time + "\n");
-            System.IO.File.AppendAllText(Application.dataPath + "/Data/Looking" + FileName2 + ".txt", "2" + "\n");
+            System.IO.File.AppendAllText(Application.dataPath + "/Data/Looking/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
+            System.IO.File.AppendAllText(Application.dataPath + "/Data/Looking/" + FileName2 + ".txt", "2" + Environment.NewLine);
             StartCoroutine(waitForNextBlink());
+        }
+        //Checks if we are looking at the screen
+        else if (_GazeIndicator.transform.parent.GetComponent<EyeTribeUnityScript>().LookingAtScreen())
+        {
+            System.IO.File.AppendAllText(Application.dataPath + "/Data/Looking/" + FileName1 + ".txt", Time.time.ToString("F2")+ Environment.NewLine);
+            System.IO.File.AppendAllText(Application.dataPath + "/Data/Looking/" + FileName2 + ".txt", "0" + Environment.NewLine);
+        } else
+        {
+            System.IO.File.AppendAllText(Application.dataPath + "/Data/Looking/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
+            System.IO.File.AppendAllText(Application.dataPath + "/Data/Looking/" + FileName2 + ".txt", "1" + Environment.NewLine);
         }
     }
 

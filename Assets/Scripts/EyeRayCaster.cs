@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class EyeRayCaster : MonoBehaviour {
 
@@ -34,47 +35,47 @@ public class EyeRayCaster : MonoBehaviour {
                 {
                     _ActiveObject = hit.transform.gameObject;
                     hit.transform.gameObject.GetComponent<ChairMovement>().LookedAt = true;
-                    System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time + "\n");
-                    System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "1");
+                    System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
+                    System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "1" + Environment.NewLine);
                     return;
                 }
                 if (hit.transform.gameObject.GetComponent<PianoTrigger>())
                 {
                     _ActiveObject = hit.transform.gameObject;
                     hit.transform.gameObject.GetComponent<PianoTrigger>().LookedAt = true;
-                    System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time + "\n");
-                    System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "2");
+                    System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
+                    System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "2" + Environment.NewLine);
                     return;
                 }
                 if (hit.transform.gameObject.GetComponent<ToiletTrigger>())
                 {
                     _ActiveObject = hit.transform.gameObject;
                     hit.transform.gameObject.GetComponent<ToiletTrigger>().LookedAt = true;
-                    System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time + "\n");
-                    System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "3");
+                    System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
+                    System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "3" + Environment.NewLine);
                     return;
                 }
                 if (hit.transform.gameObject.GetComponent<MirrorTrigger>())
                 {
                     _ActiveObject = hit.transform.gameObject;
                     hit.transform.gameObject.GetComponent<MirrorTrigger>().LookedAt = true;
-                    System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time + "\n");
-                    System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "4");
+                    System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
+                    System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "4" + Environment.NewLine);
                     return;
                 }
                 if (hit.transform.gameObject.GetComponent<TVTrigger>())
                 {
                     _ActiveObject = hit.transform.gameObject;
                     hit.transform.gameObject.GetComponent<TVTrigger>().LookedAt = true;
-                    System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time + "\n");
-                    System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "5");
+                    System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
+                    System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "5" + Environment.NewLine);
                     return;
                 }
             }
             if (_ActiveObject != null)
             {
-                System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time + "\n");
-                System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "0");
+                System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
+                System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "0" + Environment.NewLine);
                 if (_ActiveObject.GetComponent<ChairMovement>() != null)
                     _ActiveObject.GetComponent<ChairMovement>().LookedAt = false;
                 if (_ActiveObject.GetComponent<PianoTrigger>() != null)
