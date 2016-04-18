@@ -14,8 +14,10 @@ public class LookAwayHandler : MonoBehaviour {
     // Use this for initialization
     void Start () {
         _GazeIndicator = GameObject.FindGameObjectWithTag("gazeIndicator");
-        System.IO.File.Create(Application.dataPath + "/Data/Looking/" + FileName1 + ".txt");
-        System.IO.File.Create(Application.dataPath + "/Data/Looking/" + FileName2 + ".txt");
+        System.IO.FileStream x = System.IO.File.Create(Application.dataPath + "/Data/Looking/" + FileName1 + ".txt");
+        System.IO.FileStream y = System.IO.File.Create(Application.dataPath + "/Data/Looking/" + FileName2 + ".txt");
+        x.Close();
+        y.Close();
     }
 	
 	// Update is called once per frame

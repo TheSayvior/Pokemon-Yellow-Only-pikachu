@@ -27,8 +27,10 @@ public class EyeTribeUnityScript : MonoBehaviour, IGazeListener
     void Awake()
     {
         //Create log file for pupil dialation
-        System.IO.File.Create(Application.dataPath + "/Data/Eye/" + FileName1 + ".txt");
-        System.IO.File.Create(Application.dataPath + "/Data/Eye/" + FileName2 + ".txt");
+        System.IO.FileStream x = System.IO.File.Create(Application.dataPath + "/Data/Eye/" + FileName1 + ".txt");
+        System.IO.FileStream y = System.IO.File.Create(Application.dataPath + "/Data/Eye/" + FileName2 + ".txt");
+        x.Close();
+        y.Close();
     }
 
     void Start()

@@ -9,13 +9,16 @@ public class EyeRayCaster : MonoBehaviour {
     private GameObject _GazeIndicator;
     string FileName1 = "TriggerEventLogX";
     string FileName2 = "TriggerEventLogY";
+    
 
     public bool StartTriggerZones;
     // Use this for initialization
     void Start () {
         _GazeIndicator = GameObject.FindGameObjectWithTag("gazeIndicator");
-        System.IO.File.Create(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt");
-        System.IO.File.Create(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt");
+        System.IO.FileStream x = System.IO.File.Create(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt");
+        System.IO.FileStream y = System.IO.File.Create(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt");
+        x.Close();
+        y.Close();
         StartTriggerZones = false;
     }
 	

@@ -3,6 +3,7 @@ using System.Collections;
 
 public class TVTrigger : MonoBehaviour {
     public bool LookedAt;
+    public bool KeyTrigger;
     private float timeLookedAt;
     private float timeToTrigger;
     bool _move = false;
@@ -58,5 +59,11 @@ public class TVTrigger : MonoBehaviour {
         screen2.SetActive(false);
         _ac.ScreamerStop();
         // change picture back to black
+
+        lm.GetComponent<LevelManagement>().FiredEvents++;
+        if (KeyTrigger)
+        {
+            lm.GetComponent<LevelManagement>().FiredKeyEvents++;
+        }
     }
 }

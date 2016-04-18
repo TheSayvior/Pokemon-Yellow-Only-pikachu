@@ -7,8 +7,18 @@ public class LevelManagement : MonoBehaviour {
     public GameObject MonsterDoorOpen, MonsterDoorClosed;
 
     public GameObject PressEToOpenDoor;
+    public GameObject PressEToPickUpKey;
+
+    public GameObject KeyToPickUp;
+
     public Text objectiveText;
 
+
+    public int RequiredKeyEvents = 3;
+    public int FiredEvents;
+    public int FiredKeyEvents;
+
+    private bool _key;
     private AudioControl _ac;
     private EnemyController _enemy;
     private LightController _LightControl;
@@ -25,20 +35,36 @@ public class LevelManagement : MonoBehaviour {
         _enemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyController>();
         _LightControl = this.gameObject.GetComponent<LightController>();
         _triggerZoneManagement = this.gameObject.GetComponent<EyeRayCaster>();
+
+        _key = false;
+        FiredEvents = 0;
+        FiredKeyEvents = 0;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        //Handle opening main entrance
-        if (PressEToOpenDoor.gameObject.activeSelf)
+
+        if (FiredKeyEvents >= RequiredKeyEvents && !KeyToPickUp.gameObject.activeSelf && !_key)
         {
-            if (Input.GetKeyDown("e") && SecoundTimeOpening)
+            KeyToPickUp.SetActive(true);
+        }
+
+        //Handle Key pick up
+        if (KeyToPickUp.gameObject.activeSelf)
+        {
+            if (Input.GetKeyDown("e"))
             {
                 //Open door
-               
+                _key = true;
+                PressEToOpenDoor.SetActive(true);
+                PressEToPickUpKey.SetActive(false);
 
             }
-
+        }
+            //Handle opening main entrance
+            if (PressEToOpenDoor.gameObject.activeSelf)
+        {
+            //First try
             if (Input.GetKeyDown("e") && FirstTimeOpening)
             {
                 // change objective
@@ -68,6 +94,16 @@ public class LevelManagement : MonoBehaviour {
 
                 //Activate Monster
                 _enemy.Hunting = true;
+
+                //Next time will be secound time
+                SecoundTimeOpening = true;
+
+            }
+            //secound try
+            if (Input.GetKeyDown("e") && SecoundTimeOpening)
+            {
+                //Open door
+                UnityEngine.SceneManagement.SceneManager.LoadScene("Start Scene");
 
             }
         }

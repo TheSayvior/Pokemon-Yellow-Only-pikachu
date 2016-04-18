@@ -3,6 +3,7 @@ using System.Collections;
 
 public class MirrorTrigger : MonoBehaviour {
     public bool LookedAt;
+    public bool KeyTrigger;
     private float timeLookedAt;
     private float timeToTrigger;
     bool _move = false;
@@ -50,5 +51,11 @@ public class MirrorTrigger : MonoBehaviour {
         _ac.PlayScaryVoice(); // play a scream
         yield return new WaitForSeconds(1.5f);
         head.SetActive(false); // head disappear
+
+        lm.GetComponent<LevelManagement>().FiredEvents++;
+        if (KeyTrigger)
+        {
+            lm.GetComponent<LevelManagement>().FiredKeyEvents++;
+        }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PianoTrigger : MonoBehaviour {
     public bool LookedAt;
+    public bool KeyTrigger;
     private float timeLookedAt;
     private float timeToTrigger;
     bool _move = false;
@@ -56,5 +57,11 @@ public class PianoTrigger : MonoBehaviour {
         yield return new WaitForSeconds(1);
         head.SetActive(false); //setactive false head
         model.SetActive(false);
+
+        lm.GetComponent<LevelManagement>().FiredEvents++;
+        if (KeyTrigger)
+        {
+            lm.GetComponent<LevelManagement>().FiredKeyEvents++;
+        }
     }
 }

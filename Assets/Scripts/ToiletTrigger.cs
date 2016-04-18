@@ -3,6 +3,7 @@ using System.Collections;
 
 public class ToiletTrigger : MonoBehaviour {
     public bool LookedAt;
+    public bool KeyTrigger;
     private float timeLookedAt;
     private float timeToTrigger;
     bool _move = false;
@@ -29,6 +30,11 @@ public class ToiletTrigger : MonoBehaviour {
             lm.GetComponent<LightController>().OneLampBlink(lamp, 4); //make light blink
             _ac.StartFlush();// make toilet flush sound
             count = 1;
+            lm.GetComponent<LevelManagement>().FiredEvents++;
+            if (KeyTrigger)
+            {
+                lm.GetComponent<LevelManagement>().FiredKeyEvents++;
+            }
             return;
         }
         if (LookedAt)

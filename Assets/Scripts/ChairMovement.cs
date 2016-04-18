@@ -5,6 +5,7 @@ public class ChairMovement : MonoBehaviour {
 
     public bool LookedAt = false;
     public float animationSpeed = 0.3f;
+    public bool KeyTrigger;
     bool _move = false;
     float timeLookedAt, timeToTrigger, animationDistance, count = 0;
     Vector3 startPos;
@@ -27,6 +28,12 @@ public class ChairMovement : MonoBehaviour {
             lm.GetComponent<LightController>().OneLampBlink(lamp, 3f);
             _ac.StartDragging();
             count = 1;
+
+            lm.GetComponent<LevelManagement>().FiredEvents++;
+            if (KeyTrigger)
+            {
+                lm.GetComponent<LevelManagement>().FiredKeyEvents++;
+            }
         }
         if (_move && animationDistance < 1)
         {
