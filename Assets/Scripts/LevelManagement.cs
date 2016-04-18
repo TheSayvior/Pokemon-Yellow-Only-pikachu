@@ -56,8 +56,11 @@ public class LevelManagement : MonoBehaviour {
             {
                 //Open door
                 _key = true;
-                PressEToOpenDoor.SetActive(true);
                 PressEToPickUpKey.SetActive(false);
+                KeyToPickUp.SetActive(false);
+
+                //Next time will be secound time
+                SecoundTimeOpening = true;
 
             }
         }
@@ -95,16 +98,15 @@ public class LevelManagement : MonoBehaviour {
                 //Activate Monster
                 _enemy.Hunting = true;
 
-                //Next time will be secound time
-                SecoundTimeOpening = true;
+                
 
             }
             //secound try
-            if (Input.GetKeyDown("e") && SecoundTimeOpening)
+            if (Input.GetKeyDown("e") && SecoundTimeOpening && _key && PressEToOpenDoor.gameObject.activeSelf)
             {
                 //Open door
-                UnityEngine.SceneManagement.SceneManager.LoadScene("Start Scene");
-
+                Application.Quit();
+                UnityEditor.EditorApplication.isPlaying = false;
             }
         }
 

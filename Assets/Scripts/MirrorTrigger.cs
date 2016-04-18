@@ -17,7 +17,7 @@ public class MirrorTrigger : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        timeToTrigger = 2f;
+        timeToTrigger = 0.8f;
         lm = GameObject.FindGameObjectWithTag("LevelManager");
         _ac = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioControl>();
     }

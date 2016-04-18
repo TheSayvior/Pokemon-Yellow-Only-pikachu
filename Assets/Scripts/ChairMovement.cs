@@ -15,7 +15,7 @@ public class ChairMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        timeToTrigger = 1f;
+        timeToTrigger = 0.5f;
         startPos = transform.position;
         lm = GameObject.FindGameObjectWithTag("LevelManager");
         _ac = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioControl>();

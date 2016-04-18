@@ -14,7 +14,7 @@ public class KeyController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player" && (LevelManagement.FirstTimeOpening || LevelManagement.SecoundTimeOpening))
+        if (other.gameObject.tag == "Player")
         {
 
             PressEText.SetActive(true);

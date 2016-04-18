@@ -16,7 +16,7 @@ public class PianoTrigger : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        timeToTrigger = 2f;
+        timeToTrigger = 1f;
         lm = GameObject.FindGameObjectWithTag("LevelManager");
         _ac = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioControl>();
     }

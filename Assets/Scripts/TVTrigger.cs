@@ -17,7 +17,7 @@ public class TVTrigger : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        timeToTrigger = 1f;
+        timeToTrigger = 0.5f;
         lm = GameObject.FindGameObjectWithTag("LevelManager");
         _ac = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioControl>();
     }

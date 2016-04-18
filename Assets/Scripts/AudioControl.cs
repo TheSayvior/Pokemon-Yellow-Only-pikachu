@@ -14,7 +14,13 @@ public class AudioControl : MonoBehaviour {
     public AudioSource Screamer;
     public AudioSource StaticTV;
     public AudioSource ToiletFlush;
+    public AudioSource Clock;
     public AudioSource GhoulGrowl, GhoulBreath;
+
+    void Start()
+    {
+        Clock.Play();
+    }
 
     public void PlayScaryVoice()
     {
