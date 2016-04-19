@@ -26,9 +26,9 @@ public class LevelManagement : MonoBehaviour {
 
     public static bool FirstTimeOpening = true,
                  SecoundTimeOpening = false;
-                   
+
     // Use this for initialization
-    void Start () {
+    void Start() {
         objectiveText.text = "Find the main entrance";
         RenderSettings.ambientIntensity = 0.2f;
         _ac = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioControl>();
@@ -40,9 +40,9 @@ public class LevelManagement : MonoBehaviour {
         FiredEvents = 0;
         FiredKeyEvents = 0;
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update() {
 
         if (FiredKeyEvents >= RequiredKeyEvents && !KeyToPickUp.gameObject.activeSelf && !_key)
         {
@@ -64,8 +64,8 @@ public class LevelManagement : MonoBehaviour {
 
             }
         }
-            //Handle opening main entrance
-            if (PressEToOpenDoor.gameObject.activeSelf)
+        //Handle opening main entrance
+        if (PressEToOpenDoor.gameObject.activeSelf)
         {
             //First try
             if (Input.GetKeyDown("e") && FirstTimeOpening)
@@ -98,7 +98,7 @@ public class LevelManagement : MonoBehaviour {
                 //Activate Monster
                 _enemy.Hunting = true;
 
-                
+
 
             }
             //secound try
@@ -106,7 +106,8 @@ public class LevelManagement : MonoBehaviour {
             {
                 //Open door
                 Application.Quit();
-                UnityEditor.EditorApplication.isPlaying = false;
+
+                //UnityEditor.EditorApplication.isPlaying = false;
             }
         }
 
