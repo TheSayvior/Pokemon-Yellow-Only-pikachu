@@ -61,7 +61,7 @@ public class LevelManagement : MonoBehaviour {
 
                 //Next time will be secound time
                 SecoundTimeOpening = true;
-
+                objectiveText.text = "Use the key to get out";
             }
         }
         //Handle opening main entrance
