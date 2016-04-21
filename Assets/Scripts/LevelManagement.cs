@@ -13,6 +13,9 @@ public class LevelManagement : MonoBehaviour {
 
     public Text objectiveText;
 
+    public bool TriggerByEyesight = true;
+    public bool TriggerByCollider = false;
+    public bool TriggerBySeen = false;
 
     public int RequiredKeyEvents = 3;
     public int FiredEvents;
