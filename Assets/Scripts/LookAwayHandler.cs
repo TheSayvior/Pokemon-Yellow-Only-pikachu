@@ -26,7 +26,7 @@ public class LookAwayHandler : MonoBehaviour {
         if (_GazeIndicator.transform.parent.GetComponent<EyeTribeUnityScript>().Blinking() && !blinkTimer)
         {
             System.IO.File.AppendAllText(Application.dataPath + "/Data/Looking/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
-            System.IO.File.AppendAllText(Application.dataPath + "/Data/Looking/" + FileName2 + ".txt", "2" + Environment.NewLine);
+            System.IO.File.AppendAllText(Application.dataPath + "/Data/Looking/" + FileName2 + ".txt", "10" + Environment.NewLine);
             StartCoroutine(waitForNextBlink());
         }
         //Checks if we are looking at the screen
@@ -37,7 +37,7 @@ public class LookAwayHandler : MonoBehaviour {
         } else
         {
             System.IO.File.AppendAllText(Application.dataPath + "/Data/Looking/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
-            System.IO.File.AppendAllText(Application.dataPath + "/Data/Looking/" + FileName2 + ".txt", "1" + Environment.NewLine);
+            System.IO.File.AppendAllText(Application.dataPath + "/Data/Looking/" + FileName2 + ".txt", "5" + Environment.NewLine);
         }
     }
 
