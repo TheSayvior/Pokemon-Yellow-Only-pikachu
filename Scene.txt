@@ -1,10 +1,5 @@
 mere lys ved klaveret
 
-ændre objective efter man har taget nøglen
-
-lyde skal måske være lidt lavere
-
-
 
 test hvis trigger efter tid, giver samme resultat
 
