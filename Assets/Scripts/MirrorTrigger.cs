@@ -10,9 +10,15 @@ public class MirrorTrigger : MonoBehaviour {
 
     GameObject lm;
     AudioControl _ac;
+    LevelManagement lmScript;
 
     public GameObject lamp, head;
-    private float count = 0;
+    public GameObject TriggerCollider;
+    private CollisionController _cc;
+    private Renderer _renderer;
+
+    private bool EventFired = false;
+    private bool CollisionHappend = false;
 
     // Use this for initialization
     void Start()
@@ -20,12 +26,69 @@ public class MirrorTrigger : MonoBehaviour {
         timeToTrigger = 0.8f;
         lm = GameObject.FindGameObjectWithTag("LevelManager");
         _ac = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioControl>();
+        lmScript = lm.GetComponent<LevelManagement>();
+        //Needed for collider detection
+        if (lmScript.TriggerByCollider)
+        {
+            _cc = TriggerCollider.GetComponent<CollisionController>();
+        }
+        //Needed for Has been seen detection
+        _renderer = this.gameObject.GetComponent<Renderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_move && count == 0)
+        if (lmScript.MonsterDoorClosed.activeSelf)
+        {
+            return;
+        }
+        if (lmScript.TriggerByEyesight)
+        {
+            TriggerMirrorByEyesight();
+        }
+        if (lmScript.TriggerByCollider)
+        {
+            TriggerMirrorByCollider();
+        }
+        if (lmScript.TriggerBySeen)
+        {
+            TriggerMirrorBySeen();
+        }
+    }
+
+    private void TriggerMirrorByEyesight()
+    {
+        if (_move && !EventFired)
+        {
+            lm.GetComponent<LightController>().OneLampBlink(lamp, 3); //make light blink
+            StartCoroutine(MirrorSequence());
+            return;
+        }
+        if (LookedAt)
+        {
+            timeLookedAt += Time.deltaTime;
+            if (timeLookedAt >= timeToTrigger)
+            {
+                _move = true;
+                Debug.Log("HAR KIGGET i OVER " + timeToTrigger + " SEKUNDER NU");
+            }
+            return;
+        }
+        timeLookedAt = 0;
+    }
+    private void TriggerMirrorByCollider()
+    {
+        if (_cc.Collision && !EventFired)
+        {
+            lm.GetComponent<LightController>().OneLampBlink(lamp, 3); //make light blink
+            StartCoroutine(MirrorSequence());
+            return;
+        }
+    }
+    private void TriggerMirrorBySeen()
+    {
+        if (_move && !EventFired && _renderer.isVisible)
         {
             lm.GetComponent<LightController>().OneLampBlink(lamp, 3); //make light blink
             StartCoroutine(MirrorSequence());
@@ -46,7 +109,7 @@ public class MirrorTrigger : MonoBehaviour {
 
     IEnumerator MirrorSequence()
     {
-        count = 1;
+        EventFired = true;
         head.SetActive(true); // head appear at the towels
         _ac.PlayScaryVoice(); // play a scream
         yield return new WaitForSeconds(1.5f);
