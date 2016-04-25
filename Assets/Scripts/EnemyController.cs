@@ -33,7 +33,7 @@ public class EnemyController : MonoBehaviour {
         _rigidBody = this.gameObject.GetComponent<Rigidbody>();
         _positionLastFrame = this.gameObject.transform.position;
     }
-	
+
 	// Update is called once per frame
 	void Update () {
         if (!Hunting)
@@ -150,4 +150,6 @@ public class EnemyController : MonoBehaviour {
     {
 
     }
+
+
 }

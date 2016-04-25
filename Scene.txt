@@ -1,6 +1,6 @@
-mere lys ved klaveret
+ret triggers 
+	når det er med collider, tjek for collider triggers
 
+tilføj døren som trigger
 
-test hvis trigger efter tid, giver samme resultat
-
-test hvis colliders istedet for eye triggers, giver samme resultat
+visualiser data bedre, evt. med punkter eller barer

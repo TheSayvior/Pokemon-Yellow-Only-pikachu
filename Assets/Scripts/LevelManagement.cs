@@ -32,6 +32,7 @@ public class LevelManagement : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
+        Cursor.visible = false;
         objectiveText.text = "Find the main entrance";
         RenderSettings.ambientIntensity = 0.2f;
         _ac = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioControl>();
@@ -47,13 +48,21 @@ public class LevelManagement : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
+        if (Time.timeScale == 0)
+        {
+            if (Input.GetKeyDown("r"))
+            {
+                Application.LoadLevel(0);
+            }
+        }
+
         if (FiredKeyEvents >= RequiredKeyEvents && !KeyToPickUp.gameObject.activeSelf && !_key)
         {
             KeyToPickUp.SetActive(true);
         }
 
         //Handle Key pick up
-        if (KeyToPickUp.gameObject.activeSelf)
+        if (KeyToPickUp.gameObject.activeSelf && PressEToPickUpKey.activeSelf)
         {
             if (Input.GetKeyDown("e"))
             {
