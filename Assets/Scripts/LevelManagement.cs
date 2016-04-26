@@ -57,12 +57,12 @@ public class LevelManagement : MonoBehaviour {
 
         if (Time.timeScale == 0)
         {
-            objectiveText.text = "Press R to restart game";
+            objectiveText.text = ".................";
             blackscreen.SetActive(true);
-            if (Input.GetKeyDown("r"))
-            {
-                SceneManager.LoadScene("Start Scene");
-            }
+            //if (Input.GetKeyDown("r"))
+            //{
+            //    SceneManager.LoadScene("Start Scene");
+            //}
         }
 
         if (FiredKeyEvents >= RequiredKeyEvents && !KeyToPickUp.gameObject.activeSelf && !_key)
