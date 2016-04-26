@@ -64,6 +64,9 @@ public class ToiletTrigger : MonoBehaviour {
     {
         if (_move && !EventFired)
         {
+
+            System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
+            System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "49" + Environment.NewLine);
             lm.GetComponent<LightController>().OneLampBlink(lamp, 4); //make light blink
             _ac.StartFlush();// make toilet flush sound
             EventFired = true;
@@ -91,6 +94,8 @@ public class ToiletTrigger : MonoBehaviour {
     {
         if (_move && !EventFired && !_renderer.isVisible)
         {
+            System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
+            System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "49" + Environment.NewLine);
             lm.GetComponent<LightController>().OneLampBlink(lamp, 4); //make light blink
             _ac.StartFlush();// make toilet flush sound
             EventFired = true;

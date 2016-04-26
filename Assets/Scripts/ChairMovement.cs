@@ -67,6 +67,9 @@ public class ChairMovement : MonoBehaviour {
     {
         if (_move && !EventFired)
         {
+            System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
+            System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "43" + Environment.NewLine);
+
             lm.GetComponent<LightController>().OneLampBlink(lamp, 3f);
             _ac.StartDragging();
             EventFired = true;
@@ -132,6 +135,9 @@ public class ChairMovement : MonoBehaviour {
     {
         if (_move && !EventFired && !_renderer.isVisible)
         {
+            System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
+            System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "43" + Environment.NewLine);
+
             lm.GetComponent<LightController>().OneLampBlink(lamp, 3f);
             _ac.StartDragging();
             EventFired = true;

@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 
 public class LevelManagement : MonoBehaviour {
 
@@ -11,7 +12,7 @@ public class LevelManagement : MonoBehaviour {
     public GameObject PressEToPickUpKey;
 
     public GameObject KeyToPickUp;
-
+    public GameObject blackscreen;
     public Text objectiveText;
 
     public bool TriggerByEyesight = true;
@@ -36,6 +37,8 @@ public class LevelManagement : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
+        blackscreen.SetActive(false);
+        Time.timeScale = 1;
         Cursor.visible = false;
         objectiveText.text = "Find the main entrance";
         RenderSettings.ambientIntensity = 0.2f;
@@ -54,9 +57,11 @@ public class LevelManagement : MonoBehaviour {
 
         if (Time.timeScale == 0)
         {
+            objectiveText.text = "Press R to restart game";
+            blackscreen.SetActive(true);
             if (Input.GetKeyDown("r"))
             {
-                Application.LoadLevel(0);
+                SceneManager.LoadScene("Start Scene");
             }
         }
 
