@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class TVTrigger : MonoBehaviour {
     public bool LookedAt;
@@ -20,6 +21,9 @@ public class TVTrigger : MonoBehaviour {
 
     private bool EventFired = false;
     private bool CollisionHappend = false;
+
+    string FileName1 = "TriggerEventLogX";
+    string FileName2 = "TriggerEventLogY";
 
     // Use this for initialization
     void Start()
@@ -113,6 +117,9 @@ public class TVTrigger : MonoBehaviour {
 
     IEnumerator TVSequence()
     {
+        System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
+        System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "55" + Environment.NewLine);
+
         EventFired = true;
         screen1.SetActive(true); // change texture to "stracht" picture
         _ac.StartTV();// start "flimmer" sound

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System;
 
 public class LevelManagement : MonoBehaviour {
 
@@ -29,6 +30,9 @@ public class LevelManagement : MonoBehaviour {
 
     public static bool FirstTimeOpening = true,
                  SecoundTimeOpening = false;
+
+    string FileName1 = "TriggerEventLogX";
+    string FileName2 = "TriggerEventLogY";
 
     // Use this for initialization
     void Start() {
@@ -82,6 +86,9 @@ public class LevelManagement : MonoBehaviour {
             //First try
             if (Input.GetKeyDown("e") && FirstTimeOpening)
             {
+                System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
+                System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "60" + Environment.NewLine);
+
                 // change objective
                 objectiveText.text = "Find the hidden key";
 

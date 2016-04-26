@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class PianoTrigger : MonoBehaviour {
     public bool LookedAt;
@@ -20,6 +21,9 @@ public class PianoTrigger : MonoBehaviour {
 
     private bool EventFired = false;
     private bool CollisionHappend = false;
+
+    string FileName1 = "TriggerEventLogX";
+    string FileName2 = "TriggerEventLogY";
 
     // Use this for initialization
     void Start()
@@ -112,6 +116,10 @@ public class PianoTrigger : MonoBehaviour {
 
     IEnumerator PianoSequence()
     {
+
+        System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
+        System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "46" + Environment.NewLine);
+
         EventFired = true;
         _ac.StartScare(); //play scare sound
         blackscreen.SetActive(true);//turn off camera for a bit

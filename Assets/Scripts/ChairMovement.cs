@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class ChairMovement : MonoBehaviour {
 
@@ -20,6 +21,9 @@ public class ChairMovement : MonoBehaviour {
 
     private bool EventFired = false;
     private bool CollisionHappend = false;
+
+    string FileName1 = "TriggerEventLogX";
+    string FileName2 = "TriggerEventLogY";
 
     // Use this for initialization
     void Start () {
@@ -98,6 +102,10 @@ public class ChairMovement : MonoBehaviour {
     {
         if ((_cc.Collision || CollisionHappend) && !EventFired)
         {
+
+            System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
+            System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "43" + Environment.NewLine);
+
             _move = true;
             CollisionHappend = true;
             lm.GetComponent<LightController>().OneLampBlink(lamp, 3f);

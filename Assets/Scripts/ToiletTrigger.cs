@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class ToiletTrigger : MonoBehaviour {
     public bool LookedAt;
@@ -18,6 +19,9 @@ public class ToiletTrigger : MonoBehaviour {
     public GameObject TriggerCollider;
     private CollisionController _cc;
     private Renderer _renderer;
+
+    string FileName1 = "TriggerEventLogX";
+    string FileName2 = "TriggerEventLogY";
 
     // Use this for initialization
     void Start()
@@ -113,6 +117,9 @@ public class ToiletTrigger : MonoBehaviour {
     {
         if (_cc.Collision && !EventFired)
         {
+            System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
+            System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "49" + Environment.NewLine);
+
             lm.GetComponent<LightController>().OneLampBlink(lamp, 4); //make light blink
             _ac.StartFlush();// make toilet flush sound
             lmScript.FiredEvents++;

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class MirrorTrigger : MonoBehaviour {
     public bool LookedAt;
@@ -19,6 +20,9 @@ public class MirrorTrigger : MonoBehaviour {
 
     private bool EventFired = false;
     private bool CollisionHappend = false;
+
+    string FileName1 = "TriggerEventLogX";
+    string FileName2 = "TriggerEventLogY";
 
     // Use this for initialization
     void Start()
@@ -109,6 +113,8 @@ public class MirrorTrigger : MonoBehaviour {
 
     IEnumerator MirrorSequence()
     {
+        System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
+        System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "52" + Environment.NewLine);
         EventFired = true;
         head.SetActive(true); // head appear at the towels
         _ac.PlayScaryVoice(); // play a scream
