@@ -31,6 +31,12 @@ public class EyeRayCaster : MonoBehaviour {
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.transform.position, _GazeIndicator.transform.position - Camera.main.transform.position, out hit, 100))
         {
+            if (hit.transform.root.tag == "Enemy")
+            {
+                System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
+                System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "3" + Environment.NewLine);
+            }
+
             if(hit.transform.tag == "LookAtObject")
             {
                 Debug.Log("rammer nu");
@@ -39,7 +45,7 @@ public class EyeRayCaster : MonoBehaviour {
                     _ActiveObject = hit.transform.gameObject;
                     hit.transform.gameObject.GetComponent<ChairMovement>().LookedAt = true;
                     System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
-                    System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "3" + Environment.NewLine);
+                    System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "6" + Environment.NewLine);
                     return;
                 }
                 if (hit.transform.gameObject.GetComponent<PianoTrigger>())
@@ -47,7 +53,7 @@ public class EyeRayCaster : MonoBehaviour {
                     _ActiveObject = hit.transform.gameObject;
                     hit.transform.gameObject.GetComponent<PianoTrigger>().LookedAt = true;
                     System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
-                    System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "6" + Environment.NewLine);
+                    System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "9" + Environment.NewLine);
                     return;
                 }
                 if (hit.transform.gameObject.GetComponent<ToiletTrigger>())
@@ -55,7 +61,7 @@ public class EyeRayCaster : MonoBehaviour {
                     _ActiveObject = hit.transform.gameObject;
                     hit.transform.gameObject.GetComponent<ToiletTrigger>().LookedAt = true;
                     System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
-                    System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "9" + Environment.NewLine);
+                    System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "12" + Environment.NewLine);
                     return;
                 }
                 if (hit.transform.gameObject.GetComponent<MirrorTrigger>())
@@ -63,7 +69,7 @@ public class EyeRayCaster : MonoBehaviour {
                     _ActiveObject = hit.transform.gameObject;
                     hit.transform.gameObject.GetComponent<MirrorTrigger>().LookedAt = true;
                     System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
-                    System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "12" + Environment.NewLine);
+                    System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "15" + Environment.NewLine);
                     return;
                 }
                 if (hit.transform.gameObject.GetComponent<TVTrigger>())
@@ -71,7 +77,7 @@ public class EyeRayCaster : MonoBehaviour {
                     _ActiveObject = hit.transform.gameObject;
                     hit.transform.gameObject.GetComponent<TVTrigger>().LookedAt = true;
                     System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
-                    System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "15" + Environment.NewLine);
+                    System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "18" + Environment.NewLine);
                     return;
                 }
             }

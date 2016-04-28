@@ -127,6 +127,10 @@ public class TVTrigger : MonoBehaviour {
         screen1.SetActive(false);
         _ac.StopTV();
         _ac.ScreamerStart(); // play high sound
+
+        System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
+        System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "55" + Environment.NewLine);
+
         screen2.SetActive(true); // change picture to "screamer" or something
         yield return new WaitForSeconds(1);
         screen2.SetActive(false);
