@@ -4,40 +4,55 @@ using System;
 
 public class GhoulSound : MonoBehaviour
 {
-    public AudioControl AudioController;
+    AudioControl _ac;
 
     public bool StartGrowling = false;
     public bool StartBreathing = true;
     public bool Growling = false;
     public bool breathing = false;
 
-    void OnTriggerEnter(Collider other)
+    void Start()
     {
-        //Debug.Log("Im not crashed");
+        _ac = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioControl>();
+    }
+
+    void OnTriggerStay(Collider other) {
         if (other.gameObject.tag == "Player")
         {
-            StartGrowling = true;
-            StartBreathing = false;
+            if (!Growling)
+            {
+                StartCoroutine(Growl());
+            }
         }
     }
 
-    void OnTriggerExit(Collider other)
-    {
-        //Debug.Log("Im not crashed");
-        if (other.gameObject.tag == "Player")
-        {
-            StartGrowling = false;
-            StartBreathing = true;
-        }
-    }
+    //void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.tag == "Player")
+    //    {
+    //        StartGrowling = true;
+    //        StartBreathing = false;
+    //        Debug.Log("Enter");
+    //    }
+    //}
+
+    //void OnTriggerExit(Collider other)
+    //{
+    //    if (other.gameObject.tag == "Player")
+    //    {
+    //        Debug.Log("Exit");
+    //        StartGrowling = false;
+    //        StartBreathing = true;
+    //    }
+    //}
 
     void Update()
     {
-        if (StartGrowling && !Growling)
-        {
-            StartCoroutine(Growl());
-        }
-        if (StartBreathing && !breathing)
+        //if (StartGrowling && !Growling)
+        //{
+        //    StartCoroutine(Growl());
+        //}
+        if (!breathing && !Growling)
         {
             StartCoroutine(Breath());
         }
@@ -46,7 +61,7 @@ public class GhoulSound : MonoBehaviour
     private IEnumerator Growl()
     {
         Growling = true;
-        AudioController.PlayGhoulGrowl();
+        _ac.PlayGhoulGrowl();
         yield return new WaitForSeconds(8);
         Growling = false;
         yield return null;
@@ -55,7 +70,7 @@ public class GhoulSound : MonoBehaviour
     private IEnumerator Breath()
     {
         breathing = true;
-        AudioController.PlayGhoulBreath();
+        _ac.PlayGhoulBreath();
         yield return new WaitForSeconds(8);
         breathing = false;
         yield return null;
