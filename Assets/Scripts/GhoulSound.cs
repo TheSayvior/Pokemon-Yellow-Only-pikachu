@@ -4,55 +4,36 @@ using System;
 
 public class GhoulSound : MonoBehaviour
 {
-    AudioControl _ac;
 
-    public bool StartGrowling = false;
-    public bool StartBreathing = true;
+
+    private AudioControl _ac;
+    private GameObject _Player;
+
     public bool Growling = false;
     public bool breathing = false;
 
     void Start()
     {
         _ac = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioControl>();
+        _Player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    void OnTriggerStay(Collider other) {
-        if (other.gameObject.tag == "Player")
+    void Update()
+    {
+
+        if (Vector3.Distance(this.transform.position, _Player.transform.position) < 3)
         {
             if (!Growling)
             {
                 StartCoroutine(Growl());
             }
+            else
+            {
+                return;
+            }
         }
-    }
 
-    //void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.gameObject.tag == "Player")
-    //    {
-    //        StartGrowling = true;
-    //        StartBreathing = false;
-    //        Debug.Log("Enter");
-    //    }
-    //}
-
-    //void OnTriggerExit(Collider other)
-    //{
-    //    if (other.gameObject.tag == "Player")
-    //    {
-    //        Debug.Log("Exit");
-    //        StartGrowling = false;
-    //        StartBreathing = true;
-    //    }
-    //}
-
-    void Update()
-    {
-        //if (StartGrowling && !Growling)
-        //{
-        //    StartCoroutine(Growl());
-        //}
-        if (!breathing && !Growling)
+        if (Vector3.Distance(this.transform.position, _Player.transform.position) < 7 && !breathing)
         {
             StartCoroutine(Breath());
         }
