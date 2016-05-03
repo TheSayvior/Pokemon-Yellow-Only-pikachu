@@ -39,7 +39,7 @@ public class FollowWhite : MonoBehaviour
         _startPosition = dot.transform.position;
         _endPosition = dot.transform.position + Vector3.right * distanceToMove;
         _startScale = dot.transform.localScale;
-        _endScale = new Vector3(0.2f, 0.2f, 0.2f);
+        _endScale = new Vector3(0.05f, 0.05f, 0.01f);
     }
 
     void Update()
@@ -66,7 +66,7 @@ public class FollowWhite : MonoBehaviour
             //Perform the actual lerping.  Notice that the first two parameters will always be the same
             //throughout a single lerp-processs (ie. they won't change until we hit the space-bar again
             //to start another lerp)
-            dot.transform.position = Vector3.Lerp(_startPosition, _endPosition, percentageComplete);
+            //dot.transform.position = Vector3.Lerp(_startPosition, _endPosition, percentageComplete);
             dot.transform.localScale = Vector3.Lerp(_startScale, _endScale, percentageComplete);
             //When we've completed the lerp, we set _isLerping to false
             if (percentageComplete >= 1.0f)
