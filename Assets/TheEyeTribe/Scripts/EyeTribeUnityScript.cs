@@ -18,7 +18,7 @@ public class EyeTribeUnityScript : MonoBehaviour, IGazeListener
     private GameObject _GazeIndicator;
     private bool _ShowGazeIndicator = true;
 
-    private Eye LeftEye, RightEye;
+    public Eye LeftEye, RightEye;
     private bool Looking;
     private bool Blink;
     string FileName1 = "PupilDialationX";
