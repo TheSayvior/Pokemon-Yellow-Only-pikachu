@@ -11,7 +11,7 @@ public class blackScream : MonoBehaviour {
 
     private double[] _ealiestPupilSizes = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
-    private EyeTribeUnityScript _eyeData;
+    public EyeTribeUnityScript _eyeData;
 
     private double InitialPupilSize;
 
@@ -34,7 +34,7 @@ public class blackScream : MonoBehaviour {
 
         _ac = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioControl>();
 
-        EyeTribeUnityScript _eyeData = FindObjectOfType<EyeTribeUnityScript>();
+        //EyeTribeUnityScript _eyeData = FindObjectOfType<EyeTribeUnityScript>();
 
         //Start data gathering
         StartCoroutine(MeasureInitialPupilSize());
@@ -48,19 +48,29 @@ public class blackScream : MonoBehaviour {
         {
             StartCoroutine(Scare());
         }
-
 	}
     
     IEnumerator Scare()
     {
         running = true;
-        yield return new WaitForSeconds(4);
-        yield return new WaitForSeconds(UnityEngine.Random.Range(4, 12));
+        yield return new WaitForSeconds(15);
+        _ac.BabyStart();
+        System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
+        System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "45" + Environment.NewLine);
+        yield return new WaitForSeconds(UnityEngine.Random.Range(8, 12));
+        _ac.BabyStart();
+        System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
+        System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "45" + Environment.NewLine);
+        yield return new WaitForSeconds(UnityEngine.Random.Range(8, 12));
         _ac.ScreamerStart();
         System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
         System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "45" + Environment.NewLine);
         yield return new WaitForSeconds(0.5f);
         _ac.ScreamerStop();
+        yield return new WaitForSeconds(UnityEngine.Random.Range(8, 12));
+        _ac.BabyStart();
+        System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
+        System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "45" + Environment.NewLine);
         running = false;
     }
 
@@ -68,16 +78,15 @@ public class blackScream : MonoBehaviour {
     {
         yield return new WaitForSeconds(0.5f);
         int count = 0;
-        while (Time.time < 7)
+        while (Time.time < 14)
         {
-            if (_eyeData != null)
-            {
-                InitialPupilSize = InitialPupilSize + ((_eyeData.LeftEye.PupilSize + _eyeData.RightEye.PupilSize) / 2);
-                count++;
-            }
+            InitialPupilSize = InitialPupilSize + ((_eyeData.LeftEye.PupilSize + _eyeData.RightEye.PupilSize) / 2);
+            count++;
             yield return null;
         }
         InitialPupilSize = InitialPupilSize / count;
+        System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
+        System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", InitialPupilSize + Environment.NewLine);
         InitialPupilSizeCalculated = true;
     }
 

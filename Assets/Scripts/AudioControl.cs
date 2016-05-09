@@ -16,6 +16,17 @@ public class AudioControl : MonoBehaviour {
     public AudioSource ToiletFlush;
     public AudioSource Clock;
     public AudioSource GhoulGrowl, GhoulBreath;
+    public AudioSource BabyLaugh;
+
+    public void BabyStop()
+    {
+        BabyLaugh.Stop();
+    }
+
+    public void BabyStart()
+    {
+        BabyLaugh.Play();
+    }
 
     void Start()
     {
