@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.UI;
 
 public class blackScream : MonoBehaviour {
 
     AudioControl _ac;
     public GameObject black;
+
     string FileName1 = "TriggerEventLogX";
     string FileName2 = "TriggerEventLogY";
 
@@ -21,6 +23,12 @@ public class blackScream : MonoBehaviour {
     bool _calm = true;
     bool _scared = false;
 
+    public bool BlackScreen = true;
+    public bool WhiteScreen = false;
+    public bool ColorSwitchScreen = false;
+
+    private Image Screen;
+
     // Use this for initialization
     void Start () {
 
@@ -34,7 +42,24 @@ public class blackScream : MonoBehaviour {
 
         _ac = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioControl>();
 
-        //EyeTribeUnityScript _eyeData = FindObjectOfType<EyeTribeUnityScript>();
+        Screen = black.GetComponent<Image>();
+
+        if (BlackScreen)
+        {
+            Screen.color = Color.black;
+        }
+        else if (WhiteScreen)
+        {
+            Screen.color = Color.white;
+        }
+        else if(ColorSwitchScreen)
+        {
+            StartCoroutine(SwitchColorsOnScreen());
+        }
+        else
+        {
+            throw new Exception("No game mode was chosen on the Blackscream Script");
+        }
 
         //Start data gathering
         StartCoroutine(MeasureInitialPupilSize());
@@ -78,6 +103,7 @@ public class blackScream : MonoBehaviour {
     {
         yield return new WaitForSeconds(0.5f);
         int count = 0;
+
         while (Time.time < 14)
         {
             InitialPupilSize = InitialPupilSize + ((_eyeData.LeftEye.PupilSize + _eyeData.RightEye.PupilSize) / 2);
@@ -112,5 +138,45 @@ public class blackScream : MonoBehaviour {
             yield return null;
         }
         yield return null;
+    }
+
+    IEnumerator SwitchColorsOnScreen()
+    {
+        while (true)
+        {
+            if (Screen.color == Color.white)
+            {
+                Screen.color = Color.yellow;
+            }
+            else if (Screen.color == Color.yellow)
+            {
+                Screen.color = Color.red;
+            }
+            else if (Screen.color == Color.red)
+            {
+                Screen.color = Color.magenta;
+            }
+            else if (Screen.color == Color.magenta)
+            {
+                Screen.color = Color.green;
+            }
+            else if (Screen.color == Color.green)
+            {
+                Screen.color = Color.cyan;
+            }
+            else if (Screen.color == Color.cyan)
+            {
+                Screen.color = Color.blue;
+            }
+            else if (Screen.color == Color.blue)
+            {
+                Screen.color = Color.black;
+            }
+            else if (Screen.color == Color.black)
+            {
+                Screen.color = Color.white;
+            }
+            yield return new WaitForSeconds(1.5f);
+        }
     }
 }
