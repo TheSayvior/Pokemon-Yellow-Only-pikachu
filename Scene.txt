@@ -1,6 +1,8 @@
-ret triggers 
-	når det er med collider, tjek for collider triggers
+Where should we put the data analyses, 
+that we changed some triggers, added triggers, added hampel/median filter
 
-tilføj døren som trigger
+how to approach our data
+GAME RUNS - cut out the visible data at certain triggers,
+to show that sometimes it works and sometimes it doesnt
 
-visualiser data bedre, evt. med punkter eller barer
+same for color and scare test
