@@ -19,7 +19,7 @@ public class EnemyController : MonoBehaviour {
     public bool PlayerInSight = false;
 
     Vector3 _targetLocation;
-    float _gazeOnPlayerTimer = 0;
+    //float _gazeOnPlayerTimer = 0;
     NavMeshAgent _enemy;
     Animator _aniController;
     Rigidbody _rigidBody;
@@ -40,35 +40,19 @@ public class EnemyController : MonoBehaviour {
         {
             return;
         }
-      
-        //makes the animation of walking activate and deactivate
-        /*if(!_aniController.GetBool("Walking") && this.gameObject.transform.position != _positionLastFrame)
-        {
-            _aniController.SetBool("Walking", true);
-        }
-        if (this.gameObject.transform.position == _positionLastFrame)
-        {
-            _aniController.SetBool("Walking", false);
-        }
-
-        _positionLastFrame = this.gameObject.transform.position;
-        */
         if (PlayerInSight)
         {
             ChasePlayer();
         }
-
         if (_surveyingRunning)
         {
             return;
         }
-
         if (_survey && _hasTagetLocation)
         {
             StartCoroutine(Survey());
             return;
         }
-
         if (_enemy.remainingDistance == 0 && _hasTagetLocation)
         {
             _survey = true;
@@ -78,9 +62,21 @@ public class EnemyController : MonoBehaviour {
         {
             PickDestination();
         }
-
 	}
 
+
+    //makes the animation of walking activate and deactivate
+    /*if(!_aniController.GetBool("Walking") && this.gameObject.transform.position != _positionLastFrame)
+    {
+        _aniController.SetBool("Walking", true);
+    }
+    if (this.gameObject.transform.position == _positionLastFrame)
+    {
+        _aniController.SetBool("Walking", false);
+    }
+
+    _positionLastFrame = this.gameObject.transform.position;
+    */
     private void PickDestination()
     {
         int pos = Random.Range(0, Rooms.Length);

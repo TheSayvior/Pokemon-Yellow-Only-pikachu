@@ -16,7 +16,6 @@ public class PlayerDetection : MonoBehaviour {
 
     void OnTriggerStay(Collider other)
     {
-        //Debug.Log("Im not crashed");
         if (other.gameObject.tag == "Player")
         {
             //Debug.Log("PlayerInRange");
@@ -29,22 +28,16 @@ public class PlayerDetection : MonoBehaviour {
             if (angle < _enemy.fieldOfViewAngle * 0.5f)
             {
                 RaycastHit hit;
-
                 // ... and if a raycast towards the player hits something...
                 if (Physics.Raycast(this.transform.position, direction.normalized, out hit, _eyeSightRange.radius))
                 {
-                    //Debug.Log(hit.collider.name);
                     // ... and if the raycast hits the player...
                     if (hit.collider.gameObject.tag == "Player")
                     {
                         // ... the player is in sight.
-                        //Debug.DrawRay(transform.position, _player.transform.position, Color.green);
                         _enemy.PlayerInSight = true;
-                        //Debug.Log(_enemy.PlayerInSight);
-
                         // Set the last global sighting is the players current position.
                         _enemy.lastPlayerSighting = _player.transform.position;
-
                     }
                 }
             }
