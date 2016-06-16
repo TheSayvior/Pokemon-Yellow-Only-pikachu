@@ -40,13 +40,16 @@ public class blackScream : MonoBehaviour {
         x.Close();
         y.Close();
 
+        Cursor.visible = false;
+
         _ac = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioControl>();
 
         Screen = black.GetComponent<Image>();
 
         if (BlackScreen)
         {
-            Screen.color = Color.black;
+            //According the tests cyan was the mmost stabile
+            Screen.color = Color.cyan;
         }
         else if (WhiteScreen)
         {
@@ -69,7 +72,7 @@ public class blackScream : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (!running)
+        if (!running && !ColorSwitchScreen)
         {
             StartCoroutine(Scare());
         }
@@ -79,23 +82,23 @@ public class blackScream : MonoBehaviour {
     {
         running = true;
         yield return new WaitForSeconds(15);
-        _ac.BabyStart();
-        System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
-        System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "45" + Environment.NewLine);
-        yield return new WaitForSeconds(UnityEngine.Random.Range(8, 12));
-        _ac.BabyStart();
-        System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
-        System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "45" + Environment.NewLine);
-        yield return new WaitForSeconds(UnityEngine.Random.Range(8, 12));
+        //_ac.BabyStart();
+        //System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
+        //System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "45" + Environment.NewLine);
+        //yield return new WaitForSeconds(UnityEngine.Random.Range(8, 12));
+        //_ac.BabyStart();
+        //System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
+        //System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "45" + Environment.NewLine);
+        yield return new WaitForSeconds(UnityEngine.Random.Range(1, 5));
         _ac.ScreamerStart();
         System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
         System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "45" + Environment.NewLine);
         yield return new WaitForSeconds(0.5f);
         _ac.ScreamerStop();
-        yield return new WaitForSeconds(UnityEngine.Random.Range(8, 12));
-        _ac.BabyStart();
-        System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
-        System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "45" + Environment.NewLine);
+        //yield return new WaitForSeconds(UnityEngine.Random.Range(8, 12));
+        //_ac.BabyStart();
+        //System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
+        //System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "45" + Environment.NewLine);
         running = false;
     }
 
@@ -176,7 +179,9 @@ public class blackScream : MonoBehaviour {
             {
                 Screen.color = Color.white;
             }
-            yield return new WaitForSeconds(1.5f);
+            System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
+            System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "20" + Environment.NewLine);
+            yield return new WaitForSeconds(12f);
         }
     }
 }

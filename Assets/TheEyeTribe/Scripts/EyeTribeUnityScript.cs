@@ -94,10 +94,14 @@ public class EyeTribeUnityScript : MonoBehaviour, IGazeListener
         RightEye = GazeDataValidator.Instance.GetLastValidRightEye();
         if (LeftEye != null && RightEye != null)
         {
-            System.IO.File.AppendAllText(Application.dataPath + "/Data/Eye/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
-            System.IO.File.AppendAllText(Application.dataPath + "/Data/Eye/" + FileName2 + ".txt", (LeftEye.PupilSize + RightEye.PupilSize) / 2 + Environment.NewLine);
-            System.IO.File.AppendAllText(Application.dataPath + "/Data/Eye/" + FileName3 + ".txt", LeftEye.PupilSize + Environment.NewLine);
-            System.IO.File.AppendAllText(Application.dataPath + "/Data/Eye/" + FileName4 + ".txt", RightEye.PupilSize + Environment.NewLine);
+            System.IO.File.AppendAllText(Application.dataPath + "/Data/Eye/" +
+                FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
+            System.IO.File.AppendAllText(Application.dataPath + "/Data/Eye/" +
+                FileName2 + ".txt", (LeftEye.PupilSize + RightEye.PupilSize) / 2 + Environment.NewLine);
+            System.IO.File.AppendAllText(Application.dataPath + "/Data/Eye/" +
+                FileName3 + ".txt", LeftEye.PupilSize + Environment.NewLine);
+            System.IO.File.AppendAllText(Application.dataPath + "/Data/Eye/" +
+                FileName4 + ".txt", RightEye.PupilSize + Environment.NewLine);
         
         }
         else

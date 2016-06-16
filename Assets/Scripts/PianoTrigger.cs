@@ -117,8 +117,10 @@ public class PianoTrigger : MonoBehaviour {
     IEnumerator PianoSequence()
     {
 
-        System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
-        System.IO.File.AppendAllText(Application.dataPath + "/Data/Triggers/" + FileName2 + ".txt", "46" + Environment.NewLine);
+        System.IO.File.AppendAllText(Application.dataPath +
+            "/Data/Triggers/" + FileName1 + ".txt", Time.time.ToString("F2") + Environment.NewLine);
+        System.IO.File.AppendAllText(Application.dataPath +
+            "/Data/Triggers/" + FileName2 + ".txt", "46" + Environment.NewLine);
 
         EventFired = true;
         _ac.StartScare(); //play scare sound
